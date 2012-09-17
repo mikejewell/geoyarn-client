@@ -61,6 +61,7 @@ public class StoryController extends BaseController {
 				page.setDescription(pageJSON.getString("description"));
 				page.setNextChapter(pageJSON.getInt("nextChapter"));
 
+				
 				// Build locations
 				JSONArray locationsJSON = pageJSON.getJSONArray("locations");
 				// Get each location
