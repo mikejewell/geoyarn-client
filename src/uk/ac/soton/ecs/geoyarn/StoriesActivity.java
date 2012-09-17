@@ -57,6 +57,19 @@ public class StoriesActivity extends Activity {
         
     }
     
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        locCont.removeUpdates();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        locCont.resumeUpdates();
+    }
+    
     
       public void startStory(Story s){
     	
