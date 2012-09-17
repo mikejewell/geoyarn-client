@@ -5,6 +5,7 @@
 		'id':1, 
 		'description':'To read this go to a green area.', 
 		'content':'Some Content',
+		'nextChapter':1
 		'locations':
 		[
 			[
