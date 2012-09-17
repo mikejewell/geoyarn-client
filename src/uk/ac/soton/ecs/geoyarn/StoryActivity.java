@@ -26,8 +26,8 @@ public class StoryActivity extends Activity implements ILocationActivity{
 	
 	ArrayList<Button> linkButtons;
 	StoryController storyController;
-	
 	LocationController locCont;
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
