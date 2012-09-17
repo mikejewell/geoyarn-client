@@ -58,9 +58,6 @@ public class StoriesActivity extends Activity {
     	((GeoyarnClientApplication)getApplication()).setStory(s);
     	  
     	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
-    	
-    	//storyIntent.putExtra("story", s);
-    	
     	startActivity(storyIntent);
     }
     
