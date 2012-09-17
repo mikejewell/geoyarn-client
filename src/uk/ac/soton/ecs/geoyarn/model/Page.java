@@ -3,6 +3,7 @@ package uk.ac.soton.ecs.geoyarn.model;
 public class Page {
 	private int id;
 	private String content;
+	private String description;
 	private int nextChapter;
 
 	public int getId() {
@@ -27,5 +28,13 @@ public class Page {
 
 	public void setNextChapter(int nextChapter) {
 		this.nextChapter = nextChapter;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
