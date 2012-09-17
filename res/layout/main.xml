@@ -7,6 +7,29 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_weight="5"
+        android:text="@string/title" />
+    
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="Select Story"
+        android:textSize="14sp"
+        android:layout_weight="1"
+        android:onClick="goStories"/>
+    
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="Settings"
+        android:textSize="14sp"
+        android:layout_weight="1"
+        android:onClick="goSettings"/>
 
 </LinearLayout>
