@@ -2,6 +2,7 @@ package uk.ac.soton.ecs.geoyarn;
 
 import java.util.ArrayList;
 
+import uk.ac.soton.ecs.geoyarn.controller.LocationController;
 import uk.ac.soton.ecs.geoyarn.controller.StoryController;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
@@ -9,6 +10,7 @@ import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -16,7 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class StoryActivity extends Activity {
+public class StoryActivity extends Activity implements ILocationActivity{
     
 	Story story;
 	Chapter chapter;
@@ -24,7 +26,8 @@ public class StoryActivity extends Activity {
 	
 	ArrayList<Button> linkButtons;
 	StoryController storyController;
-
+	
+	LocationController locCont;
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class StoryActivity extends Activity {
        
         linkButtons=new ArrayList<Button>();
         storyController=new StoryController();
+        locCont = new LocationController(this);
         
         story = ((GeoyarnClientApplication)getApplication()).getStory();
         
@@ -90,6 +94,20 @@ public class StoryActivity extends Activity {
     	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
     	startActivity(storyIntent);
     }
+
+
+
+	public void onLocationChanged() {
+		
+		
+	}
+
+
+
+	public void onLocationChanged(Location location) {
+		
+		
+	}
     
     
     

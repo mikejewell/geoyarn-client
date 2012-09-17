@@ -2,6 +2,7 @@ package uk.ac.soton.ecs.geoyarn;
 
 import java.util.ArrayList;
 
+import uk.ac.soton.ecs.geoyarn.controller.LocationController;
 import uk.ac.soton.ecs.geoyarn.controller.StoryController;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
@@ -18,6 +19,8 @@ public class StoriesActivity extends Activity {
 	ArrayList<Story> stories;
 	StoryController storyController;
 	
+	LocationController locCont;
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class StoriesActivity extends Activity {
     	
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.stories);
+        
+        locCont = new LocationController(this);
         
         storyController = new StoryController();
         

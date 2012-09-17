@@ -16,8 +16,8 @@ public class GeoyarnClientApplication extends Application
 	Chapter currentChapter;
 	Page currentPage;
 	
-	String currentLat;
-	String currentLong;
+	private double currentLat;
+	private double currentLong;
 	
 	private static GeoyarnClientApplication instance;
 
@@ -54,4 +54,24 @@ public class GeoyarnClientApplication extends Application
 	public Page getPage(){
 		return currentPage;
 	}
+
+	public void setCurrentLat(double currentLat) {
+		this.currentLat = currentLat;
+	}
+
+	public double getCurrentLat() {
+		return currentLat;
+	}
+
+	public void setCurrentLong(double currentLong) {
+		this.currentLong = currentLong;
+	}
+
+	public double getCurrentLong() {
+		return currentLong;
+	}
+	
+	
+	
+	
 }
