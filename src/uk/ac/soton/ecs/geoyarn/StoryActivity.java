@@ -99,7 +99,8 @@ public class StoryActivity extends Activity implements ILocationActivity{
     
     public void followLink(Page p){
     	((GeoyarnClientApplication)getApplication()).setPage(p);
-    	p.getNextChapter();
+    	chapter = storyController.getChapter(story.getId(), p.getNextChapter());
+    	((GeoyarnClientApplication)getApplication()).setChapter(chapter);
     	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
     	startActivity(storyIntent);
     }
