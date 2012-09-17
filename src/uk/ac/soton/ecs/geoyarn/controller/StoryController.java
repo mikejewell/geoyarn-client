@@ -90,7 +90,12 @@ public class StoryController extends BaseController {
 	}
 	
 	public Boolean canViewPage(Page page, Location location) {
-		return true;
+		for(SphericalPolygon poly: page.getLocations()) {
+			if(poly.contains(new Point(location.getLatitude(), location.getLongitude()))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
