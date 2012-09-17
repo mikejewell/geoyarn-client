@@ -27,4 +27,8 @@ public class GeoyarnClientApplication extends Application
 	public void setStory(Story s){
 		currentStory = s;
 	}
+	
+	public Story getStory(){
+		return currentStory;
+	}
 }

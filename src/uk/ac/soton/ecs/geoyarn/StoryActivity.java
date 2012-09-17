@@ -1,14 +1,15 @@
 package uk.ac.soton.ecs.geoyarn;
 
+import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class StoryActivity extends Activity {
     
 	Story story;
+	Chapter chapter;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -16,8 +17,10 @@ public class StoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.story);
         
+        story = ((GeoyarnClientApplication)getApplication()).getStory();
+        
         TextView storyTitle = (TextView)findViewById(R.id.StoryTitle);
-        storyTitle.setText(((GeoyarnClientApplication)getApplication()).currentStory.getTitle());
+        storyTitle.setText(story.getTitle());
         
         
     }
