@@ -69,6 +69,7 @@ public class StoryActivity extends Activity implements ILocationActivity{
         		linkButton.setText(p.getDescription());
         		linkButton.setTag(p);
         		linkButton.setBackgroundColor(Color.RED);
+        		linkButton.setEnabled(false);
         		linkButton.setOnClickListener(new View.OnClickListener(){
         			public void onClick(View v) {
         				Page page = (Page)v.getTag();
@@ -106,6 +107,15 @@ public class StoryActivity extends Activity implements ILocationActivity{
 
 	public void onLocationChanged(Location location) {
 		
+		for(Button button:linkButtons){
+			Page p = (Page)button.getTag();
+			
+			if(storyController.canViewPage(p, location)){
+				button.setBackgroundColor(Color.GREEN);
+				button.setEnabled(true);
+			}
+			
+		}
 		
 	}
     
