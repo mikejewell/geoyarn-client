@@ -89,7 +89,7 @@ public class StoryController extends BaseController {
 		return chapter;
 	}
 	
-	public Boolean canViewPage(Page chapter, Location location) {
+	public Boolean canViewPage(Page page, Location location) {
 		return true;
 	}
 
