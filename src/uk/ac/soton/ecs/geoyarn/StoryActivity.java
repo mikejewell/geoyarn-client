@@ -24,7 +24,7 @@ public class StoryActivity extends Activity {
 	
 	ArrayList<Button> linkButtons;
 	StoryController storyController;
-	
+
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
