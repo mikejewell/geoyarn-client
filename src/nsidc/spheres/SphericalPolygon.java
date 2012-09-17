@@ -67,7 +67,7 @@ public class SphericalPolygon extends Sphere
     private GreatCircleArc arc, other_arc;
 
     /* 5 = 0ff, 0 = full on */
-    private final int logLevel = 1;
+    private final int logLevel = 4;
 
     /*******************************************************************
      * The constructors.

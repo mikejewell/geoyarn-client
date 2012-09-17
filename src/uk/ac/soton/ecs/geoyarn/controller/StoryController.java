@@ -95,25 +95,46 @@ public class StoryController extends BaseController {
 	}
 	
 	public Boolean canViewPage(Page page, Location location) {
-	
-		// Make a bounding box around us (ew)
-		Point centrum = new Point(location.getLatitude(), location.getLongitude());
+		double lon = location.getLongitude();
+		double lat = location.getLatitude();
+		Point centre = new Point(lat, lon);
 		
-		double facty = 0.0002;
-		double factx = -0.00016;
+		double R = 6371; // earth radius in km
+		double radius = 0.010; // km
+		double x1 = lon - Math.toDegrees(radius/R/Math.cos(Math.toRadians(lat)));
+		double x2 = lon + Math.toDegrees(radius/R/Math.cos(Math.toRadians(lat)));
+		double y1 = lat + Math.toDegrees(radius/R);
+		double y2 = lat - Math.toDegrees(radius/R);
 		
-		SphericalPolygon centreBox = new SphericalPolygon(new Point[]{
-				new Point(centrum.lat-facty, centrum.lon-factx),
-				new Point(centrum.lat+facty, centrum.lon-factx),
-				new Point(centrum.lat+facty, centrum.lon+factx),
-				new Point(centrum.lat-facty, centrum.lon+factx)});
+		Point[] points = new Point[]{
+				new Point(y1, x1),
+				new Point(y2, x1),
+				new Point(y2, x2),
+				new Point(y1, x2)};
+		SphericalPolygon centreBox = new SphericalPolygon(points);
 		
-		Log.e(TAG, "Check if we can view from "+location);
+		Log.e(TAG, y1+","+x1);
+		Log.e(TAG, y2+","+x1);
+		Log.e(TAG, y2+","+x2);
+		Log.e(TAG, y1+","+x2);
+		
 		for(SphericalPolygon poly: page.getLocations()) {
 			
-			Log.e(TAG, page.getLocations().toString());
-			if(poly.overlaps(centreBox)) {
+			if(poly.contains(centre)) {
+				Log.e(TAG, "Centre");
 				return true;
+			}
+			
+			if(poly.overlaps(centreBox)) {
+				Log.e(TAG, "Overlaps!");
+				return true;
+			}
+			
+			for(Point point: points) {
+				if(poly.contains(point)) {
+					Log.e(TAG, "Contains");
+					return true;
+				}
 			}
 		}
 		return false;
