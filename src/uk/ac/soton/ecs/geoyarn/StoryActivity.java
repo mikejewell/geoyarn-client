@@ -66,7 +66,8 @@ public class StoryActivity extends Activity implements ILocationActivity{
         
         LinearLayout storyLinkList = (LinearLayout)findViewById(R.id.StoryLinksList);
         for(Page p:chapter.getPages()){
-        	if(p!=page){
+        	//This ||true is a debug trick - change this
+        	if(p.equals(page)||true){
         		Button linkButton = new Button(this);
         		linkButton.setText(p.getDescription());
         		linkButton.setTag(p);

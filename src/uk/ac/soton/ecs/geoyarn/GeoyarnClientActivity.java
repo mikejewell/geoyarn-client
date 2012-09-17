@@ -40,7 +40,8 @@ public class GeoyarnClientActivity extends Activity {
     }
     
     public void goSettings(View v){
-    	
+    	Intent settingsActivity = new Intent(getBaseContext(), GeoyarnPreferences.class);
+    	startActivity(settingsActivity);
     }
     
     
