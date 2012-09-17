@@ -23,8 +23,15 @@ public class LocationController{
 		GPSLocationListener gpsll = new GPSLocationListener();
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000L, 1, gpsll);
 		
-		app.setCurrentLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
-		app.setCurrentLong(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
+		if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null){
+			app.setCurrentLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
+			app.setCurrentLong(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
+		}
+		else{
+			app.setCurrentLat(0.0);
+			app.setCurrentLong(0.0);
+		}
+			
 	}
 	
 	public class GPSLocationListener implements LocationListener{
