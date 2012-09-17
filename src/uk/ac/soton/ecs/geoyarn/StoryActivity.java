@@ -95,6 +95,10 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		// Fake B32 data
 		//l.setLatitude(50.93638279940933);
 		//l.setLongitude(-1.3961811549961567);
+		// Fake interchange kiosk data
+		//l.setLatitude(50.9362519);
+		//l.setLongitude(-1.3970872);
+	
 		//onLocationChanged(l);
 	}
 
