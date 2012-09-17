@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello From Mike, GeoyarnClientActivity!</string>
-    <string name="app_name">Geoyarn-client</string>
+    <string name="title">GeoYarn</string>
+    <string name="app_name">GeoYarn</string>
 
 </resources>
