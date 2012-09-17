@@ -2,11 +2,13 @@ package uk.ac.soton.ecs.geoyarn;
 
 import java.util.ArrayList;
 
+import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
 
 public class StoriesActivity extends Activity {
     
