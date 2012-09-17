@@ -8,9 +8,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 public class LocationController{
-	
+
+	private static final String TAG = "LocationController";
 	GeoyarnClientApplication app;
 	Activity activity;
 	LocationManager locationManager;
@@ -22,6 +24,8 @@ public class LocationController{
 		locationManager=(LocationManager)a.getSystemService(Context.LOCATION_SERVICE);
 		GPSLocationListener gpsll = new GPSLocationListener();
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000L, 1, gpsll);
+		Log.e(TAG, "Hi: "+locationManager);
+		Log.e(TAG, "Tjere: "+locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 		
 		if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null){
 			app.setCurrentLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());

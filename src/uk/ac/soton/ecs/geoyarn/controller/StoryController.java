@@ -12,6 +12,7 @@ import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.location.Location;
+import android.location.LocationManager;
 import android.util.Log;
 
 public class StoryController extends BaseController {
@@ -25,6 +26,7 @@ public class StoryController extends BaseController {
 					.getURL("http://lab.thecollectedmike.com/yarn/stories.json");
 			JSONArray storiesJSON = new JSONArray(storyText);
 
+			
 			for (int i = 0; i < storiesJSON.length(); i++) {
 				JSONObject storyJSON = storiesJSON.getJSONObject(i);
 				Story story = new Story();
@@ -65,10 +67,11 @@ public class StoryController extends BaseController {
 					JSONArray locationPointsJSON = locationsJSON
 							.getJSONArray(j);
 					
+					
 					// Get each point array
 					ArrayList<Point> points = new ArrayList<Point>();
 					for (int k = 0; k < locationPointsJSON.length(); k++) {
-						JSONObject locJSON = locationPointsJSON.getJSONObject(j);
+						JSONObject locJSON = locationPointsJSON.getJSONObject(k);
 						Point point = new Point(Double.parseDouble(locJSON
 								.getString("lat")), Double.parseDouble(locJSON
 								.getString("lon")));
@@ -90,7 +93,11 @@ public class StoryController extends BaseController {
 	}
 	
 	public Boolean canViewPage(Page page, Location location) {
+	
+		Log.e(TAG, "Check if we can view from "+location);
 		for(SphericalPolygon poly: page.getLocations()) {
+			
+			Log.e(TAG, page.getLocations().toString());
 			if(poly.contains(new Point(location.getLatitude(), location.getLongitude()))) {
 				return true;
 			}

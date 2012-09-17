@@ -88,11 +88,11 @@ public class StoryActivity extends Activity implements ILocationActivity{
         
         
         Location l = new Location(LocationManager.GPS_PROVIDER);
-        l.setLatitude(50.9348699);
-        l.setLongitude(-1.3975707);
-        onLocationChanged(l);
-        
-        
+//        l.setLatitude(50.9348699);
+//        l.setLongitude(-1.3975707);50.93476290006017, -1.3973504304885864
+        l.setLatitude(50.93476290006017);
+        l.setLongitude(-1.3973504304885864);
+        onLocationChanged(l);   
     }
     
     
