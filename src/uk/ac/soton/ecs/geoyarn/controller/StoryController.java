@@ -96,11 +96,23 @@ public class StoryController extends BaseController {
 	
 	public Boolean canViewPage(Page page, Location location) {
 	
+		// Make a bounding box around us (ew)
+		Point centrum = new Point(location.getLatitude(), location.getLongitude());
+		
+		double facty = 0.0002;
+		double factx = -0.00016;
+		
+		SphericalPolygon centreBox = new SphericalPolygon(new Point[]{
+				new Point(centrum.lat-facty, centrum.lon-factx),
+				new Point(centrum.lat+facty, centrum.lon-factx),
+				new Point(centrum.lat+facty, centrum.lon+factx),
+				new Point(centrum.lat-facty, centrum.lon+factx)});
+		
 		Log.e(TAG, "Check if we can view from "+location);
 		for(SphericalPolygon poly: page.getLocations()) {
 			
 			Log.e(TAG, page.getLocations().toString());
-			if(poly.contains(new Point(location.getLatitude(), location.getLongitude()))) {
+			if(poly.overlaps(centreBox)) {
 				return true;
 			}
 		}

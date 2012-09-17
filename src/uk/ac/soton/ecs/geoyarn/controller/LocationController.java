@@ -24,8 +24,6 @@ public class LocationController{
 		locationManager=(LocationManager)a.getSystemService(Context.LOCATION_SERVICE);
 		GPSLocationListener gpsll = new GPSLocationListener();
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000L, 1, gpsll);
-		Log.e(TAG, "Hi: "+locationManager);
-		Log.e(TAG, "Tjere: "+locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 		
 		if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null){
 			app.setCurrentLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
