@@ -3,5 +3,7 @@
 
     <string name="title">GeoYarn</string>
     <string name="app_name">GeoYarn</string>
+    
+    <string name="storyBegin">To begin to story make your way to one of the following locations ...</string>
 
 </resources>

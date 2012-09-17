@@ -16,7 +16,7 @@
      
     <application
         android:name=".GeoyarnClientApplication"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/geoyarn"
         android:label="@string/app_name" >
         <activity
             android:name=".GeoyarnClientActivity"

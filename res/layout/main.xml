@@ -4,13 +4,20 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <!-- <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:gravity="center"
         android:layout_weight="5"
-        android:text="@string/title" />
+        android:text="@string/title" />-->
+    
+    <ImageView
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/geoyarn"
+        	android:layout_weight="20000" 
+    		android:gravity="top"/>
     
     <Button
         android:layout_width="fill_parent"
