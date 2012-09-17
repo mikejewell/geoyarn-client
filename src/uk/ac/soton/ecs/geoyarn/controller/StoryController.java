@@ -29,7 +29,8 @@ public class StoryController extends BaseController {
 			
 		} catch (Exception e) {
 
-			Log.e(TAG, e.getMessage());
+			//Log.e(TAG, e.getMessage());
+			Log.e(TAG, e.toString());
 		}
 		return stories;
 	}
