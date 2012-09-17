@@ -16,6 +16,9 @@ public class GeoyarnClientApplication extends Application
 	Chapter currentChapter;
 	Page currentPage;
 	
+	String currentLat;
+	String currentLong;
+	
 	private static GeoyarnClientApplication instance;
 
 	public GeoyarnClientApplication()

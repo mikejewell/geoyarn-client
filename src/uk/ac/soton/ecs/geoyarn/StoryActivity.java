@@ -2,6 +2,7 @@ package uk.ac.soton.ecs.geoyarn;
 
 import java.util.ArrayList;
 
+import uk.ac.soton.ecs.geoyarn.controller.StoryController;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
@@ -9,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,20 +23,26 @@ public class StoryActivity extends Activity {
 	Page page;
 	
 	ArrayList<Button> linkButtons;
+	StoryController storyController;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+    	
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.story);
        
         linkButtons=new ArrayList<Button>();
+        storyController=new StoryController();
         
         story = ((GeoyarnClientApplication)getApplication()).getStory();
         
         chapter = ((GeoyarnClientApplication)getApplication()).getChapter();
         if(chapter==null){
-        	//chapter=story.getStartChapter();
+        	chapter = storyController.getChapter(story.getId(), story.getStartChapter());
+        	((GeoyarnClientApplication)getApplication()).setChapter(chapter);
         }
         
         page = ((GeoyarnClientApplication)getApplication()).getPage();
@@ -50,7 +58,7 @@ public class StoryActivity extends Activity {
         	pageContentTv.setText(getResources().getString(R.string.storyBegin));
         }
         
-        LinearLayout storyLinkList = (LinearLayout)findViewById(R.id.StoryPageContent);
+        LinearLayout storyLinkList = (LinearLayout)findViewById(R.id.StoryLinksList);
         for(Page p:chapter.getPages()){
         	if(p!=page){
         		Button linkButton = new Button(this);
