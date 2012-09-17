@@ -1,7 +1,6 @@
 package uk.ac.soton.ecs.geoyarn.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import nsidc.spheres.Point;
 import nsidc.spheres.SphericalPolygon;
@@ -12,6 +11,7 @@ import org.json.JSONObject;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
+import android.location.Location;
 import android.util.Log;
 
 public class StoryController extends BaseController {
@@ -89,10 +89,8 @@ public class StoryController extends BaseController {
 		return chapter;
 	}
 	
-	public ArrayList<Page> getNearbyPages(Chapter chapter) {
-		ArrayList<Page> pages = new ArrayList<Page>();
-		
-		return pages;
+	public Boolean canViewPage(Page chapter, Location location) {
+		return true;
 	}
 
 }
