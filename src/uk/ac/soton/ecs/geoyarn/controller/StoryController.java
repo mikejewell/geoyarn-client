@@ -24,6 +24,7 @@ public class StoryController extends BaseController {
 				Story story = new Story();
 				story.setTitle(storyJSON.getString("title"));
 				story.setId(storyJSON.getInt("id"));
+				story.setStartChapter(storyJSON.getInt("startChapter"));
 				stories.add(story);
 			}
 			

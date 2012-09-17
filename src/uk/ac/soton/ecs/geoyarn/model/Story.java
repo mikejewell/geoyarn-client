@@ -8,7 +8,7 @@ public class Story {
 	private String title;
 	private String description;
 	private Date publishedDate;
-	private Chapter startChapter;
+	private int startChapter;
 
 	public int getId() {
 		return id;
@@ -42,11 +42,11 @@ public class Story {
 		this.publishedDate = publishedDate;
 	}
 
-	public Chapter getStartChapter() {
+	public int getStartChapter() {
 		return startChapter;
 	}
 
-	public void setStartChapter(Chapter startChapter) {
+	public void setStartChapter(int startChapter) {
 		this.startChapter = startChapter;
 	}
 }

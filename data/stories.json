@@ -1,19 +1,23 @@
 [
 	{
 		"id":1,
-		"title":"The Exchange"
+		"title":"The Exchange",
+		"firstChapter":1
 	},
 	{
 		"id":2,
-		"title":"Vampires"
+		"title":"Vampires",
+		"firstChapter":1
 	},
 	{
 		"id":3,
-		"title":"Recoil"
+		"title":"Recoil",
+		"firstChapter":1
 	},
 	{
 		"id":4,
-		"title":"As You Look Around You"
+		"title":"As You Look Around You",
+		"firstChapter":1
 	}
 
 ]
