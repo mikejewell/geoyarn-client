@@ -2,18 +2,20 @@ package uk.ac.soton.ecs.geoyarn;
 
 import java.util.ArrayList;
 
+import uk.ac.soton.ecs.geoyarn.controller.StoryController;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 
 public class StoriesActivity extends Activity {
     
 	ArrayList<Story> stories;
+	StoryController storyController;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -21,7 +23,11 @@ public class StoriesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stories);
         
-        stories=getStoriesList();
+        storyController = new StoryController();
+        
+        //stories=getStoriesList();
+        stories = storyController.getStories();
+        
         
         LinearLayout storiesList = (LinearLayout)findViewById(R.id.StoriesList);
         
@@ -42,32 +48,15 @@ public class StoriesActivity extends Activity {
     }
     
     
-    public ArrayList<Story> getStoriesList(){
+      public void startStory(Story s){
     	
-    	ArrayList<Story> tempStories = new ArrayList<Story>();
+    	((GeoyarnClientApplication)getApplication()).setStory(s);
+    	  
+    	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
     	
-    	Story story1 = new Story();
-    	story1.setTitle("Story 1");
-    	story1.setId(1);
+    	//storyIntent.putExtra("story", s);
     	
-    	Story story2 = new Story();
-    	story2.setTitle("Story 2");
-    	story2.setId(2);
-    	
-    	Story story3 = new Story();
-    	story3.setTitle("Story 3");
-    	story3.setId(3);
-    	
-    	tempStories.add(story1);
-    	tempStories.add(story2);
-    	tempStories.add(story3);
-    	
-    	return tempStories;    	
-    }
-    	
-    
-    public void startStory(Story s){
-    	Toast.makeText(this, "Starting story: "+s.getTitle(), Toast.LENGTH_SHORT).show();
+    	startActivity(storyIntent);
     }
     
     

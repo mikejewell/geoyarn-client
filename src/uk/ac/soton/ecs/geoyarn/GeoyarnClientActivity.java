@@ -14,8 +14,8 @@ public class GeoyarnClientActivity extends Activity {
     }
     
     public void goStories(View v){
-    	Intent settingsActivity = new Intent(getBaseContext(), StoriesActivity.class);
-    	startActivity(settingsActivity);
+    	Intent storiesIntent = new Intent(getBaseContext(), StoriesActivity.class);
+    	startActivity(storiesIntent);
     }
     
     public void goSettings(View v){
