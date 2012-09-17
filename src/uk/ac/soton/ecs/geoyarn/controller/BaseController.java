@@ -10,8 +10,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 public class BaseController {
 
+	private static final String TAG = "BaseController";
+	
 	public String getURL(String url) throws Exception {
 		String page = "";
 		BufferedReader in = null;
@@ -30,8 +34,11 @@ public class BaseController {
 			}
 			in.close();
 			page = sb.toString();
-			System.out.println(page);
-		} finally {
+		}
+		catch(Exception e) {
+			Log.e(TAG, "Errr:" +e.toString());
+		}
+		finally {
 			if (in != null) {
 				try {
 					in.close();
