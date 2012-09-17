@@ -23,7 +23,8 @@ public class LocationController{
 		
 		locationManager=(LocationManager)a.getSystemService(Context.LOCATION_SERVICE);
 		GPSLocationListener gpsll = new GPSLocationListener();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000L, 1, gpsll);
+		//locationManager.removeUpdates(gpsll);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 0, gpsll);
 		
 		if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null){
 			app.setCurrentLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
@@ -44,6 +45,10 @@ public class LocationController{
 			if(activity instanceof ILocationActivity){
 				((ILocationActivity) activity).onLocationChanged(location);				
 			}
+			
+			//locationManager.removeUpdates(this);
+			//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 50000L, 0, this);
+			
 		}
 
 		public void onProviderDisabled(String provider) {
@@ -61,6 +66,16 @@ public class LocationController{
 			
 		}
 		
+	}
+	
+	public void removeUpdates(){
+		GPSLocationListener gpsll = new GPSLocationListener();
+		locationManager.removeUpdates(gpsll);		
+	}
+	
+	public void resumeUpdates(){
+		GPSLocationListener gpsll = new GPSLocationListener();
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 0, gpsll);		
 	}
 	
 }

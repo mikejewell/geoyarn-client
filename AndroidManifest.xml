@@ -35,6 +35,14 @@
             android:name=".StoryActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".LocationManagerStatus"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+       		android:name=".GeoyarnPreferences"
+        	android:label="@string/app_name">
+		</activity>
     </application>
 
 </manifest>

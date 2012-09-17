@@ -66,7 +66,8 @@ public class StoryActivity extends Activity implements ILocationActivity{
         
         LinearLayout storyLinkList = (LinearLayout)findViewById(R.id.StoryLinksList);
         for(Page p:chapter.getPages()){
-        	if(p!=page){
+        	//This ||true is a debug trick - change this
+        	if(p.equals(page)||true){
         		Button linkButton = new Button(this);
         		linkButton.setText(p.getDescription());
         		linkButton.setTag(p);
@@ -85,33 +86,42 @@ public class StoryActivity extends Activity implements ILocationActivity{
         		
         	}
         }
-        
-        
-//        Location l = new Location(LocationManager.GPS_PROVIDER);
-//        l.setLatitude(50.9348699);
-//        l.setLongitude(-1.3975707);50.93476290006017, -1.3973504304885864
-//        l.setLatitude(50.93638279940933);
-//        l.setLongitude(-1.3961811549961567);
-//        onLocationChanged(l);   
     }
     
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        locCont.removeUpdates();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        locCont.resumeUpdates();
+    }
     
     
     public void followLink(Page p){
     	((GeoyarnClientApplication)getApplication()).setPage(p);
-    	p.getNextChapter();
+    	chapter = storyController.getChapter(story.getId(), p.getNextChapter());
+    	((GeoyarnClientApplication)getApplication()).setChapter(chapter);
     	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
     	startActivity(storyIntent);
     }
 
 	public void onLocationChanged(Location location) {
 		
-		Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
     			
 		for(Button button:linkButtons){
 			Page p = (Page)button.getTag();
 			
-			Toast.makeText(this, "Can View? "+storyController.canViewPage(p, location)+" "+location.getLatitude()+" "+location.getLongitude(), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Can View? "+storyController.canViewPage(p, location)+" "+location.getLatitude()+" "+location.getLongitude(), Toast.LENGTH_SHORT).show();
+			
+			button.setBackgroundColor(Color.RED);
+			button.setEnabled(false);
 			
 			if(storyController.canViewPage(p, location)){
 				button.setBackgroundColor(Color.GREEN);
