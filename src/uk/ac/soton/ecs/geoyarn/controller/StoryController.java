@@ -17,8 +17,8 @@ import android.util.Log;
 public class StoryController extends BaseController {
 
 	private static final String TAG = "StoryController";
-	private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
-	//private static final String BASE = "http://wais-demo.ecs.soton.ac.uk:8080/geoyarn/";
+	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
+	private static final String BASE = "http://wais-demo.ecs.soton.ac.uk/geoyarn/";
 
 	
 	public ArrayList<Story> getStories() {
@@ -49,10 +49,11 @@ public class StoryController extends BaseController {
 		Chapter chapter = new Chapter();
 		try {
 			String chapterText = this
-					.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&lon="+longitude);
+					.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
 
+			
 			// Build pages
 			JSONArray pagesJSON = chapterJSON.getJSONArray("pages");
 			for (int i = 0; i < pagesJSON.length(); i++) {
