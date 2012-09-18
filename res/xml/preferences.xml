@@ -8,5 +8,21 @@
                         android:key="ServerURL" 
                 		android:defaultValue="" 
                 		android:persistent="true"/>
+	
+	<CheckBoxPreference
+                        android:name="Free Reading Mode"
+                        android:summary="Allows reading of chapters regardless of location"
+                        android:title="Free Reading Mode"
+                        android:key="FreeReadingMode"  
+                		android:defaultValue="false" 
+                		android:persistent="true"/>
+	
+    <CheckBoxPreference
+                        android:name="Demo Mode"
+                        android:summary="First Click Activates Link Buttons"
+                        android:title="Demo Mode"
+                        android:key="DemoMode"  
+                		android:defaultValue="false" 
+                		android:persistent="true"/>
 
 </PreferenceScreen>
