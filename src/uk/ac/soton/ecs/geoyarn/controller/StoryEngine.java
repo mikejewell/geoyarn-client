@@ -1,10 +1,18 @@
 package uk.ac.soton.ecs.geoyarn.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
 import java.util.ArrayList;
 
 import nsidc.spheres.Point;
 import nsidc.spheres.SphericalPolygon;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,7 +22,7 @@ import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.location.Location;
 import android.util.Log;
 
-public class StoryController extends BaseController {
+public class StoryEngine {
 
 	private static final String TAG = "StoryController";
 	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
@@ -141,6 +149,41 @@ public class StoryController extends BaseController {
 			}
 		}
 		return false;
+	}
+	
+	public String getURL(String url) throws Exception {
+		Log.e(TAG, "Load "+url);
+		String page = "";
+		BufferedReader in = null;
+		try {
+			HttpClient client = new DefaultHttpClient();
+			HttpGet request = new HttpGet();
+			request.setURI(new URI(url));
+			HttpResponse response = client.execute(request);
+			in = new BufferedReader(new InputStreamReader(response.getEntity()
+					.getContent()));
+			StringBuffer sb = new StringBuffer("");
+			String line = "";
+			String NL = System.getProperty("line.separator");
+			while ((line = in.readLine()) != null) {
+				sb.append(line + NL);
+			}
+			in.close();
+			page = sb.toString();
+		}
+		catch(Exception e) {
+			Log.e(TAG, "Errr:" +e.toString());
+		}
+		finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return page;
 	}
 
 }

@@ -3,7 +3,7 @@ package uk.ac.soton.ecs.geoyarn;
 import java.util.ArrayList;
 
 import uk.ac.soton.ecs.geoyarn.controller.LocationController;
-import uk.ac.soton.ecs.geoyarn.controller.StoryController;
+import uk.ac.soton.ecs.geoyarn.controller.StoryEngine;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
@@ -29,7 +29,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	Page page;
 
 	ArrayList<Button> linkButtons;
-	StoryController storyController;
+	StoryEngine storyController;
 	LocationController locCont;
 
 	SharedPreferences settings;
@@ -56,7 +56,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 				.getDefaultSharedPreferences(getBaseContext());
 
 		linkButtons = new ArrayList<Button>();
-		storyController = new StoryController();
+		storyController = new StoryEngine();
 		locCont = new LocationController(this);
 
 		story = ((GeoyarnClientApplication) getApplication()).getStory();
