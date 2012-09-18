@@ -42,6 +42,7 @@ public class LocationController{
 		public void onLocationChanged(Location location) {
 			app.setCurrentLat(location.getLatitude());
 			app.setCurrentLong(location.getLatitude());
+			
 			if(activity instanceof ILocationActivity){
 				((ILocationActivity) activity).onLocationChanged(location);				
 			}

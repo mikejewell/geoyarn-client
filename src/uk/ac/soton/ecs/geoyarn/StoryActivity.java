@@ -103,6 +103,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		//l.setLongitude(-1.3970872);
 	
 		//onLocationChanged(l);
+		Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -128,14 +129,14 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 	public void onLocationChanged(Location location) {
 
-		// Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
 
 		for (Button button : linkButtons) {
 			Page p = (Page) button.getTag();
 
-			// Toast.makeText(this, "Can View? "+storyController.canViewPage(p,
-			// location)+" "+location.getLatitude()+" "+location.getLongitude(),
-			// Toast.LENGTH_SHORT).show();
+			 Toast.makeText(this, "Can View? "+storyController.canViewPage(p,
+			 location)+" "+location.getLatitude()+" "+location.getLongitude()+" "+p.getDescription()+" "+location.getAccuracy(),
+			 Toast.LENGTH_SHORT).show();
 
 			button.setBackgroundColor(Color.RED);
 			button.setEnabled(false);
