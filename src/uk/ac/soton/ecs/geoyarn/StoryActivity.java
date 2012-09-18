@@ -9,11 +9,13 @@ import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,6 +31,10 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	ArrayList<Button> linkButtons;
 	StoryController storyController;
 	LocationController locCont;
+	
+	SharedPreferences settings;
+	
+	boolean democlick;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -39,6 +45,10 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.story);
+		
+		democlick=false;
+		
+		settings=PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 		linkButtons = new ArrayList<Button>();
 		storyController = new StoryController();
@@ -67,6 +77,11 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		}
 
 		LinearLayout storyLinkList = (LinearLayout) findViewById(R.id.StoryLinksList);
+		
+		boolean defEnabled = settings.getBoolean("FreeReadingMode", false);
+		if(settings.getBoolean("DemoMode", false))
+			defEnabled=true;
+		
 		for (Page p : chapter.getPages()) {
 			// This ||true is a debug trick - change this
 			if (p.equals(page) || true) {
@@ -74,7 +89,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 				linkButton.setText(p.getDescription());
 				linkButton.setTag(p);
 				linkButton.setBackgroundColor(Color.RED);
-				linkButton.setEnabled(false);
+				linkButton.setEnabled(defEnabled);
 				linkButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						Page page = (Page) v.getTag();
@@ -103,7 +118,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		//l.setLongitude(-1.3970872);
 	
 		//onLocationChanged(l);
-		Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -120,17 +135,33 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	}
 
 	public void followLink(Page p) {
-		((GeoyarnClientApplication) getApplication()).setPage(p);
-		chapter = storyController.getChapter(story.getId(), p.getNextChapter());
-		((GeoyarnClientApplication) getApplication()).setChapter(chapter);
-		Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
-		startActivity(storyIntent);
+		if(settings.getBoolean("DemoMode", false)&&!democlick){
+			democlick=true;
+			for (Button button : linkButtons) {
+				Page bp = (Page) button.getTag();
+				if(bp.equals(p)){
+					button.setBackgroundColor(Color.GREEN);
+				}
+			}
+		}
+		else{
+		
+			((GeoyarnClientApplication) getApplication()).setPage(p);
+			chapter = storyController.getChapter(story.getId(), p.getNextChapter());
+			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
+			Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
+			startActivity(storyIntent);
+		}
 	}
 
 	public void onLocationChanged(Location location) {
 
-		Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
 
+		boolean defEnabled = settings.getBoolean("FreeReadingMode", false);
+		if(settings.getBoolean("DemoMode", false));
+			defEnabled=true;
+		
 		for (Button button : linkButtons) {
 			Page p = (Page) button.getTag();
 
@@ -139,7 +170,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 			 Toast.LENGTH_SHORT).show();
 
 			button.setBackgroundColor(Color.RED);
-			button.setEnabled(false);
+			button.setEnabled(defEnabled);
 
 			if (storyController.canViewPage(p, location)) {
 				button.setBackgroundColor(Color.GREEN);
