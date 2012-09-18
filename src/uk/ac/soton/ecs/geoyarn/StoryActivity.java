@@ -68,6 +68,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
 
+		
 		page = ((GeoyarnClientApplication) getApplication()).getPage();
 
 		TextView storyTitleTv = (TextView) findViewById(R.id.StoryTitle);
@@ -113,7 +114,6 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		// Fake stag's head data
 		// l.setLatitude(50.934601);
 		// l.setLongitude(-1.397424);
-
 		// Fake B32 data
 		// l.setLatitude(50.93638279940933);
 		// l.setLongitude(-1.3961811549961567);
@@ -168,7 +168,6 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		if (settings.getBoolean("DemoMode", false))
 			;
 		defEnabled = true;
-
 		for (Button button : linkButtons) {
 			Page p = (Page) button.getTag();
 
