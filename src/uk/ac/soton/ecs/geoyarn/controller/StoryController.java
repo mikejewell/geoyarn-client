@@ -17,8 +17,8 @@ import android.util.Log;
 public class StoryController extends BaseController {
 
 	private static final String TAG = "StoryController";
-	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
-	private static final String BASE = "http://wais-demo.ecs.soton.ac.uk:8080/geoyarn/";
+	private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
+	//private static final String BASE = "http://wais-demo.ecs.soton.ac.uk:8080/geoyarn/";
 
 	
 	public ArrayList<Story> getStories() {

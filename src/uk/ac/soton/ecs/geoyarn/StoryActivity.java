@@ -31,10 +31,12 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	ArrayList<Button> linkButtons;
 	StoryController storyController;
 	LocationController locCont;
-	
+
 	SharedPreferences settings;
-	
+
 	boolean democlick;
+	
+	GeoyarnClientApplication app;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -43,12 +45,15 @@ public class StoryActivity extends Activity implements ILocationActivity {
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
+		app = (GeoyarnClientApplication) getApplication();
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.story);
-		
-		democlick=false;
-		
-		settings=PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+		democlick = false;
+
+		settings = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
 
 		linkButtons = new ArrayList<Button>();
 		storyController = new StoryController();
@@ -59,7 +64,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		chapter = ((GeoyarnClientApplication) getApplication()).getChapter();
 		if (chapter == null) {
 			chapter = storyController.getChapter(story.getId(),
-					story.getStartChapter());
+					story.getStartChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
 
@@ -77,11 +82,11 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		}
 
 		LinearLayout storyLinkList = (LinearLayout) findViewById(R.id.StoryLinksList);
-		
+
 		boolean defEnabled = settings.getBoolean("FreeReadingMode", false);
-		if(settings.getBoolean("DemoMode", false))
-			defEnabled=true;
-		
+		if (settings.getBoolean("DemoMode", false))
+			defEnabled = true;
+
 		for (Page p : chapter.getPages()) {
 			// This ||true is a debug trick - change this
 			if (p.equals(page) || true) {
@@ -103,22 +108,22 @@ public class StoryActivity extends Activity implements ILocationActivity {
 			}
 		}
 
-		//Location l = new Location(LocationManager.GPS_PROVIDER);
-		
+		// Location l = new Location(LocationManager.GPS_PROVIDER);
+
 		// Fake stag's head data
-		//l.setLatitude(50.934601);
-		//l.setLongitude(-1.397424);
-		
+		// l.setLatitude(50.934601);
+		// l.setLongitude(-1.397424);
+
 		// Fake B32 data
-		//l.setLatitude(50.93638279940933);
-		//l.setLongitude(-1.3961811549961567);
-		
+		// l.setLatitude(50.93638279940933);
+		// l.setLongitude(-1.3961811549961567);
+
 		// Fake interchange kiosk data
-		//l.setLatitude(50.9362519);
-		//l.setLongitude(-1.3970872);
-	
-		//onLocationChanged(l);
-		//Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
+		// l.setLatitude(50.9362519);
+		// l.setLongitude(-1.3970872);
+
+		// onLocationChanged(l);
+		// Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -135,39 +140,45 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	}
 
 	public void followLink(Page p) {
-		if(settings.getBoolean("DemoMode", false)&&!democlick){
-			democlick=true;
+		if (settings.getBoolean("DemoMode", false) && !democlick) {
+			democlick = true;
 			for (Button button : linkButtons) {
 				Page bp = (Page) button.getTag();
-				if(bp.equals(p)){
+				if (bp.equals(p)) {
 					button.setBackgroundColor(Color.GREEN);
 				}
 			}
-		}
-		else{
-		
+		} else {
+
 			((GeoyarnClientApplication) getApplication()).setPage(p);
-			chapter = storyController.getChapter(story.getId(), p.getNextChapter());
+			chapter = storyController.getChapter(story.getId(),
+					p.getNextChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
-			Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
+			Intent storyIntent = new Intent(getBaseContext(),
+					StoryActivity.class);
 			startActivity(storyIntent);
 		}
 	}
 
 	public void onLocationChanged(Location location) {
 
-		//Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(this, "Loc Changed!", Toast.LENGTH_SHORT).show();
 
 		boolean defEnabled = settings.getBoolean("FreeReadingMode", false);
-		if(settings.getBoolean("DemoMode", false));
-			defEnabled=true;
-		
+		if (settings.getBoolean("DemoMode", false))
+			;
+		defEnabled = true;
+
 		for (Button button : linkButtons) {
 			Page p = (Page) button.getTag();
 
-			 Toast.makeText(this, "Can View? "+storyController.canViewPage(p,
-			 location)+" "+location.getLatitude()+" "+location.getLongitude()+" "+p.getDescription()+" "+location.getAccuracy(),
-			 Toast.LENGTH_SHORT).show();
+			Toast.makeText(
+					this,
+					"Can View? " + storyController.canViewPage(p, location)
+							+ " " + location.getLatitude() + " "
+							+ location.getLongitude() + " "
+							+ p.getDescription() + " " + location.getAccuracy(),
+					Toast.LENGTH_SHORT).show();
 
 			button.setBackgroundColor(Color.RED);
 			button.setEnabled(defEnabled);
