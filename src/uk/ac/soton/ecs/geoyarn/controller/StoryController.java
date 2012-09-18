@@ -12,18 +12,18 @@ import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.location.Location;
-import android.location.LocationManager;
 import android.util.Log;
 
 public class StoryController extends BaseController {
 
 	private static final String TAG = "StoryController";
+	private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
 
 	public ArrayList<Story> getStories() {
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
 			String storyText = this
-					.getURL("http://lab.thecollectedmike.com/yarn/stories.json");
+					.getURL(BASE+"story/");
 			JSONArray storiesJSON = new JSONArray(storyText);
 
 			
@@ -32,7 +32,7 @@ public class StoryController extends BaseController {
 				Story story = new Story();
 				story.setTitle(storyJSON.getString("title"));
 				story.setId(storyJSON.getInt("id"));
-				story.setStartChapter(storyJSON.getInt("startChapter"));
+				story.setStartChapter(storyJSON.getInt("start_chapter_id"));
 				stories.add(story);
 			}
 
@@ -47,7 +47,7 @@ public class StoryController extends BaseController {
 		Chapter chapter = new Chapter();
 		try {
 			String chapterText = this
-					.getURL("http://lab.thecollectedmike.com/yarn/chapter.json");
+					.getURL(BASE+"chapter/"+chapterid);
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
 
