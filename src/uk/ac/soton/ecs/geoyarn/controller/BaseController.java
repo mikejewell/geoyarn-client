@@ -17,6 +17,7 @@ public class BaseController {
 	private static final String TAG = "BaseController";
 	
 	public String getURL(String url) throws Exception {
+		Log.e(TAG, "Load "+url);
 		String page = "";
 		BufferedReader in = null;
 		try {

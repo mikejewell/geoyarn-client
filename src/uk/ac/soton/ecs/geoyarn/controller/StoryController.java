@@ -17,13 +17,15 @@ import android.util.Log;
 public class StoryController extends BaseController {
 
 	private static final String TAG = "StoryController";
-	private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
+	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
+	private static final String BASE = "http://wais-demo.ecs.soton.ac.uk:8080/geoyarn/";
 
+	
 	public ArrayList<Story> getStories() {
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
 			String storyText = this
-					.getURL(BASE+"story/");
+					.getURL(BASE +"story/");
 			JSONArray storiesJSON = new JSONArray(storyText);
 
 			
@@ -43,11 +45,11 @@ public class StoryController extends BaseController {
 		return stories;
 	}
 
-	public Chapter getChapter(int storyid, int chapterid) {
+	public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
 		Chapter chapter = new Chapter();
 		try {
 			String chapterText = this
-					.getURL(BASE+"chapter/"+chapterid);
+					.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&lon="+longitude);
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
 
@@ -58,22 +60,22 @@ public class StoryController extends BaseController {
 				JSONObject pageJSON = pagesJSON.getJSONObject(i);
 				page.setId(pageJSON.getInt("id"));
 				page.setContent(pageJSON.getString("content"));
-				page.setDescription(pageJSON.getString("description"));
-				page.setNextChapter(pageJSON.getInt("nextChapter"));
+				page.setDescription(pageJSON.getString("title"));
+				page.setNextChapter(pageJSON.getInt("next_chapter"));
 
 				
 				// Build locations
 				JSONArray locationsJSON = pageJSON.getJSONArray("locations");
 				// Get each location
 				for (int j = 0; j < locationsJSON.length(); j++) {
-					JSONArray locationPointsJSON = locationsJSON
-							.getJSONArray(j);
+					JSONObject locationJSON = locationsJSON.getJSONObject(j);
+					JSONArray polygonJSON = locationJSON.getJSONArray("polygon");
 					
 					
 					// Get each point array
 					ArrayList<Point> points = new ArrayList<Point>();
-					for (int k = 0; k < locationPointsJSON.length(); k++) {
-						JSONObject locJSON = locationPointsJSON.getJSONObject(k);
+					for (int k = 0; k < polygonJSON.length(); k++) {
+						JSONObject locJSON = polygonJSON.getJSONObject(k);
 						Point point = new Point(Double.parseDouble(locJSON
 								.getString("lat")), Double.parseDouble(locJSON
 								.getString("lon")));
@@ -100,7 +102,7 @@ public class StoryController extends BaseController {
 		Point centre = new Point(lat, lon);
 		
 		double R = 6371; // earth radius in km
-		double radius = 0.010; // km
+		double radius = 0.005; // km
 		double x1 = lon - Math.toDegrees(radius/R/Math.cos(Math.toRadians(lat)));
 		double x2 = lon + Math.toDegrees(radius/R/Math.cos(Math.toRadians(lat)));
 		double y1 = lat + Math.toDegrees(radius/R);
