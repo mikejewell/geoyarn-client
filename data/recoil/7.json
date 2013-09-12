@@ -2,15 +2,15 @@
 	"id":7,
 	"pages":[
 	{
-		"id":1, 
-		"description":"Approach the water.", 
+		"id":8, 
+		"title":"Approach the water.", 
 		"content":"The sound of wind in the trees was quickly joined by that of the splash and babble of water. A small stream ran alongside the path, quickly carrying fallen leaves off into the distance. I became aware that its currents and eddies were the first motion I had seen since I had left the road. The place was unnaturally still, and coupled with its familiarity I felt as though I was wandering through a photograph or a memory as part of some wistful dream. There had been no people, no sound of animals, just leaves, and water.",
-		"nextChapter":8,
+		"next_chapter":8,
 		"locations":
 		[
-			[
-
-				{"lat":"50.9345783", "lon":"-1.3974006"},
+			{
+				"polygons":
+				[{"lat":"50.9345783", "lon":"-1.3974006"},
 				{"lat":"50.9348699", "lon":"-1.3975707"},
 				{"lat":"50.93492", "lon":"-1.3973133"},
 				{"lat":"50.9349321", "lon":"-1.397251"},
@@ -22,12 +22,12 @@
 				{"lat":"50.9347187", "lon":"-1.3971428"},
 				{"lat":"50.9347251", "lon":"-1.3971257"},
 				{"lat":"50.9346499", "lon":"-1.3970764"},
-				{"lat":"50.9345911", "lon":"-1.3973427"}
-			]
+				{"lat":"50.9345911", "lon":"-1.3973427"}]
+			}
 		]
 	},
 	{
-		"id":2,
+		"id":9,
 		"description":"Make your way to somewhere people gather.",
 		"content":"As I made my way along the path I quickened my pace only to be interrupted in my silence once again by the cacophony of humanity. The trees parted to reveal a crowd, and the air was alive with their conversation. Why exactly they had gathered here didn’t seem apparent, but they were here amongst the tables and chairs, and the sudden return to humanity shook me into the realisation I had a job to do. What was the name again? Ford? I turned from person to person, asking over and over, “Are you Ford?”, “Have you seen a Ford?”, “Excuse me I’m looking for Ford”. But I was faced with blank stares, bemused shrugs, and shaking heads. I was almost a ghost in the crowd, barely perceived, and unacknowledged. There was nothing for me here, this place didn’t know me anymore.",
 		"nextChapter":8,

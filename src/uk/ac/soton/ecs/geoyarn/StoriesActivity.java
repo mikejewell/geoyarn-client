@@ -3,7 +3,7 @@ package uk.ac.soton.ecs.geoyarn;
 import java.util.ArrayList;
 
 import uk.ac.soton.ecs.geoyarn.controller.LocationController;
-import uk.ac.soton.ecs.geoyarn.controller.StoryController;
+import uk.ac.soton.ecs.geoyarn.controller.StoryEngine;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 public class StoriesActivity extends Activity {
     
 	ArrayList<Story> stories;
-	StoryController storyController;
+	StoryEngine storyController;
 	
 	LocationController locCont;
 	
@@ -33,7 +33,7 @@ public class StoriesActivity extends Activity {
         
         locCont = new LocationController(this);
         
-        storyController = new StoryController();
+        storyController = new StoryEngine();
         
         //stories=getStoriesList();
         stories = storyController.getStories();
