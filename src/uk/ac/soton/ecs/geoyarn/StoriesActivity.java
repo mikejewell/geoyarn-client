@@ -74,6 +74,8 @@ public class StoriesActivity extends Activity {
       public void startStory(Story s){
     	
     	((GeoyarnClientApplication)getApplication()).setStory(s);
+    	((GeoyarnClientApplication) getApplication()).setChapter(null);
+    	((GeoyarnClientApplication) getApplication()).setPage(null);
     	  
     	Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
     	startActivity(storyIntent);

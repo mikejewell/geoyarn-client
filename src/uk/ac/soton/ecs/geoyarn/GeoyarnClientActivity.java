@@ -44,6 +44,11 @@ public class GeoyarnClientActivity extends Activity {
     	startActivity(settingsActivity);
     }
     
+    public void loctest(View v){
+    	Intent settingsActivity = new Intent(getBaseContext(), LocationManagerStatus.class);
+    	startActivity(settingsActivity);
+    }
+    
     
     
     

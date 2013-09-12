@@ -67,9 +67,10 @@ public class StoryActivity extends Activity implements ILocationActivity {
 					story.getStartChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
-
 		
 		page = ((GeoyarnClientApplication) getApplication()).getPage();
+		
+		//Toast.makeText(this, "Start! Page:"+page.getId()+" Chapter:"+chapter.getId()+" Story:"+story.getId(), Toast.LENGTH_SHORT).show();
 
 		TextView storyTitleTv = (TextView) findViewById(R.id.StoryTitle);
 		storyTitleTv.setText(story.getTitle());
@@ -90,7 +91,8 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 		for (Page p : chapter.getPages()) {
 			// This ||true is a debug trick - change this
-			if (p.equals(page) || true) {
+			
+			if (page == null || page.getId() != p.getId()) {				
 				Button linkButton = new Button(this);
 				linkButton.setText(p.getDescription());
 				linkButton.setTag(p);
@@ -106,6 +108,18 @@ public class StoryActivity extends Activity implements ILocationActivity {
 				linkButtons.add(linkButton);
 				storyLinkList.addView(linkButton);
 
+			}
+			
+			if(linkButtons.size()==0){
+				Button linkButton = new Button(this);
+				linkButton.setText("Story End");
+				linkButton.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						backToMenu();
+					}
+				});
+				
+				storyLinkList.addView(linkButton);
 			}
 		}
 
@@ -171,13 +185,13 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		for (Button button : linkButtons) {
 			Page p = (Page) button.getTag();
 
-			Toast.makeText(
+			/*Toast.makeText(
 					this,
 					"Can View? " + storyController.canViewPage(p, location)
 							+ " " + location.getLatitude() + " "
 							+ location.getLongitude() + " "
 							+ p.getDescription() + " " + location.getAccuracy(),
-					Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();*/
 
 			button.setBackgroundColor(Color.RED);
 			button.setEnabled(defEnabled);
@@ -189,6 +203,11 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 		}
 
+	}
+	
+	public void backToMenu(){
+		Intent storiesIntent = new Intent(getBaseContext(), GeoyarnClientActivity.class);
+    	startActivity(storiesIntent);
 	}
 
 }
