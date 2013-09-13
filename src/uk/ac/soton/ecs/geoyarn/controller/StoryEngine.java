@@ -3,16 +3,23 @@ package uk.ac.soton.ecs.geoyarn.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 import nsidc.spheres.Point;
 import nsidc.spheres.SphericalPolygon;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,9 +42,14 @@ public class StoryEngine {
 	private static final String TAG = "StoryController";
 	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
 	private static final String BASE = "http://wais-demo.ecs.soton.ac.uk/geoyarn/";
+	private static final String LOC_BASE = "http://tools.southampton.ac.uk/places/";
+	
+	String[] boundingBox={"-1.4164621","50.9270515","-1.3992239","50.9372517"};
 
 	
 	public ArrayList<Story> getStories() {
+		
+		
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
 			String storyText = this
@@ -62,6 +74,17 @@ public class StoryEngine {
 	}
 
 	public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
+		
+		try {
+			locationQuery("green", boundingBox);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Chapter chapter = new Chapter();
 		try {
 			String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
@@ -231,7 +254,7 @@ public class StoryEngine {
 		return location;
 	}
 	
-	public void loadLocations(Page page, JSONObject pageJSON) throws JSONException{
+	public void loadLocations(Page page, JSONObject pageJSON) throws JSONException, UnsupportedEncodingException{
 		// Build locations
 		
 		if(!pageJSON.isNull("locations")){
@@ -247,12 +270,131 @@ public class StoryEngine {
 		}
 		else if(!pageJSON.isNull("query")){
 			//do a query, load the locations into the page
-			LocationQueryResult queryResult = new LocationQueryResult(pageJSON.getString("query"));
+			LocationQueryResult queryResult = locationQuery(pageJSON.getString("query"),boundingBox);
 			Set<SphericalPolygon> locations = queryResult.getLocations();
 			for(SphericalPolygon location:locations){
 				page.addLocation(location);
 			}
 		}
+	}
+	
+	/*public LocationQueryResult locationQuery(String query) throws JSONException{
+		LocationQueryResult queryResult = new LocationQueryResult();
+		
+		
+		HttpClient httpclient = new DefaultHttpClient();
+        
+    	HttpGet request = new HttpGet(LOC_BASE +"areas/"+query+".json");
+        request.addHeader("deviceId", "xxxxx"); 
+                
+        ResponseHandler<String> handler = new BasicResponseHandler(); 
+        HttpResponse response = null;
+		
+        String result="DEFAULT GET RESULT";
+        Log.i("GeoYarn: ", "HttpClient Created");
+        try {  
+        	Log.i("GeoYarn: ", "GET Request at "+LOC_BASE +"areas/"+query+".json");
+        		response = httpclient.execute(request);
+        		result = handler.handleResponse(response);
+        		Log.i("GeoYarn: ", "GET Request at "+LOC_BASE +"areas/"+query+".json"+" response "+result);
+       
+        } catch (ClientProtocolException e) {  
+        	result = e.toString();
+        	e.printStackTrace();
+        	Log.e("GeoYarn: ", "GET Fail "+ e);
+        } catch (IOException e) {
+        	result = e.toString();
+            e.printStackTrace();
+            Log.e("GeoYarn: ", "GET Fail "+ e);
+        }  
+        httpclient.getConnectionManager().shutdown();
+        
+        JSONArray resultJSON = new JSONArray(result).getJSONObject(0).getJSONArray("features");
+        for(int i = 0; i<resultJSON.length(); i++){
+        	JSONObject resultFeatureJSON = resultJSON.getJSONObject(i);
+        	JSONArray locationPolyJSON=resultFeatureJSON.getJSONObject("geometry").getJSONArray("coordinates").getJSONArray(0);
+        	JSONObject metaPolyJSON=resultFeatureJSON.getJSONObject("properties");
+        	
+        	ArrayList<Point> points = new ArrayList<Point>();
+        	
+        	for(int l = 0; l<locationPolyJSON.length();l++){
+        		JSONArray pointJSON = locationPolyJSON.getJSONArray(l);
+        		Point point = new Point(pointJSON.getDouble(0), pointJSON.getDouble(1));
+    			points.add(point);
+        	}
+        	SphericalPolygon location = new SphericalPolygon(points.toArray(new Point[] {}));
+        	queryResult.addLocations(location);
+        	
+        	Iterator<String> metadataKeys = metaPolyJSON.keys();
+        	if(metadataKeys.hasNext()){
+        		String key = metadataKeys.next();
+        		queryResult.addMetaData(key, metaPolyJSON.getString(key));
+        	}
+        }
+        
+		
+		return queryResult;
+	}*/
+	
+	public LocationQueryResult locationQuery(String query, String[] boundingBox) throws JSONException, UnsupportedEncodingException{
+		LocationQueryResult queryResult = new LocationQueryResult();
+		
+		
+		HttpClient httpclient = new DefaultHttpClient();
+        
+    	HttpPost request = new HttpPost(LOC_BASE +"areas/"+query+".json");
+        request.addHeader("deviceId", "xxxxx"); 
+        request.addHeader("Content-Type", "text/xml");
+        request.setEntity(new StringEntity("-1.4164621,50.9270515,-1.3992239,50.9372517"));
+                
+        ResponseHandler<String> handler = new BasicResponseHandler(); 
+        HttpResponse response = null;
+		
+        String result="DEFAULT POST RESULT";
+        Log.i("GeoYarn: ", "HttpClient Created");
+        try {  
+        	Log.i("GeoYarn: ", "POST Request at "+LOC_BASE +"areas/"+query+".json");
+        		response = httpclient.execute(request);
+        		result = handler.handleResponse(response);
+        		Log.i("GeoYarn: ", "POST Request at "+LOC_BASE +"areas/"+query+".json"+" response "+result);
+       
+        } catch (ClientProtocolException e) {  
+        	result = e.toString();
+        	e.printStackTrace();
+        	Log.e("GeoYarn: ", "POST Fail "+ e);
+        } catch (IOException e) {
+        	result = e.toString();
+            e.printStackTrace();
+            Log.e("GeoYarn: ", "POST Fail "+ e);
+        }  
+        httpclient.getConnectionManager().shutdown();
+        
+        JSONObject resultJSON = new JSONObject(result);
+        JSONArray featuresJSON=resultJSON.getJSONArray("features");
+        for(int i = 0; i<resultJSON.length(); i++){
+        	JSONObject resultFeatureJSON = featuresJSON.getJSONObject(i);
+        	JSONArray locationPolyJSON=resultFeatureJSON.getJSONObject("geometry").getJSONArray("coordinates").getJSONArray(0);
+        	JSONObject metaPolyJSON=resultFeatureJSON.getJSONObject("properties");
+        	
+        	ArrayList<Point> points = new ArrayList<Point>();
+        	
+        	for(int l = 0; l<locationPolyJSON.length();l++){
+        		JSONArray pointJSON = locationPolyJSON.getJSONArray(l);
+        		Point point = new Point(pointJSON.getDouble(0), pointJSON.getDouble(1));
+    			points.add(point);
+        	}
+        	SphericalPolygon location = new SphericalPolygon(points.toArray(new Point[] {}));
+        	queryResult.addLocations(location);
+        	
+        	Iterator<String> metadataKeys = metaPolyJSON.keys();
+        	if(metadataKeys.hasNext()){
+        		String key = metadataKeys.next();
+        		queryResult.addMetaData(key, metaPolyJSON.getString(key));
+        	}
+        }
+        
+		
+		return queryResult;
 	}
 
 }

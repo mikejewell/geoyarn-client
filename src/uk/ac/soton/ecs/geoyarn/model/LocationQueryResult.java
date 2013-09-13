@@ -11,7 +11,7 @@ public class LocationQueryResult{
 	private Set<SphericalPolygon> locations;
 	HashMap<String, String> metadata;
 	
-	public LocationQueryResult(String query){
+	public LocationQueryResult(){
 		locations = new HashSet<SphericalPolygon>();
 		metadata = new HashMap<String,String>();
 		
@@ -24,5 +24,21 @@ public class LocationQueryResult{
 	
 	public Set<SphericalPolygon> getLocations(){
 		return locations;
+	}
+	
+	public void setMetaData(HashMap<String, String> md){
+		metadata=md;
+	}
+	
+	public void setLocations(Set<SphericalPolygon> locs){
+		locations=locs;
+	}
+	
+	public void addMetaData(String key, String value){
+		metadata.put(key, value);
+	}
+	
+	public void addLocations(SphericalPolygon loc){
+		locations.add(loc);
 	}
 }
