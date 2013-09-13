@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Set;
 
 import nsidc.spheres.Point;
 import nsidc.spheres.SphericalPolygon;
@@ -14,10 +15,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.ac.soton.ecs.geoyarn.GeoyarnClientApplication;
+import uk.ac.soton.ecs.geoyarn.R;
 import uk.ac.soton.ecs.geoyarn.model.AlarmTrigger;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
+import uk.ac.soton.ecs.geoyarn.model.LocationQueryResult;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import uk.ac.soton.ecs.geoyarn.model.TimerTrigger;
@@ -59,11 +64,11 @@ public class StoryEngine {
 	public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
 		Chapter chapter = new Chapter();
 		try {
-			String chapterText = this
-					.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
+			String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
+			//String chapterText = getResources().getString(R.string.storyBegin);
+			
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
-
 			
 			// Build pages
 			JSONArray pagesJSON = chapterJSON.getJSONArray("pages");
@@ -75,29 +80,8 @@ public class StoryEngine {
 				page.setDescription(pageJSON.getString("title"));
 				page.setNextChapter(pageJSON.getInt("next_chapter"));
 
-				
-				// Build locations
-				JSONArray locationsJSON = pageJSON.getJSONArray("locations");
-				// Get each location
-				for (int j = 0; j < locationsJSON.length(); j++) {
-					JSONObject locationJSON = locationsJSON.getJSONObject(j);
-					JSONArray polygonJSON = locationJSON.getJSONArray("polygon");
-					
-					
-					// Get each point array
-					ArrayList<Point> points = new ArrayList<Point>();
-					for (int k = 0; k < polygonJSON.length(); k++) {
-						JSONObject locJSON = polygonJSON.getJSONObject(k);
-						Point point = new Point(Double.parseDouble(locJSON
-								.getString("lat")), Double.parseDouble(locJSON
-								.getString("lon")));
-						points.add(point);
-					}
-
-					page.getLocations()
-							.add(new SphericalPolygon(points
-									.toArray(new Point[] {})));
-				}
+				loadLocations(page, pageJSON);
+								
 				//chapter.getPages().add(page);
 				chapter.addPage(page);
 			}
@@ -132,6 +116,17 @@ public class StoryEngine {
 			Log.e(TAG, e.toString());
 		}
 		return chapter;
+	}
+	
+	
+	public Page processPage(Page page){
+		
+		String content = page.getContent();
+		
+		
+		
+		return page;
+		
 	}
 	
 	public Boolean canViewPage(Page page, Location location) {
@@ -213,6 +208,51 @@ public class StoryEngine {
 			}
 		}
 		return page;
+	}
+	
+	
+	public SphericalPolygon loadLocation(JSONObject locationJSON) throws JSONException{
+		SphericalPolygon location = null;
+		
+		JSONArray polygonJSON = locationJSON.getJSONArray("polygon");
+					
+		// Get each point array
+		ArrayList<Point> points = new ArrayList<Point>();
+		for (int k = 0; k < polygonJSON.length(); k++) {
+			JSONObject locJSON = polygonJSON.getJSONObject(k);
+			Point point = new Point(Double.parseDouble(locJSON
+					.getString("lat")), Double.parseDouble(locJSON
+					.getString("lon")));
+			points.add(point);
+		}
+		
+		location = new SphericalPolygon(points.toArray(new Point[] {}));
+		
+		return location;
+	}
+	
+	public void loadLocations(Page page, JSONObject pageJSON) throws JSONException{
+		// Build locations
+		
+		if(!pageJSON.isNull("locations")){
+		
+			JSONArray locationsJSON = pageJSON.getJSONArray("locations");
+			// Get each location
+			for (int j = 0; j < locationsJSON.length(); j++) {
+				JSONObject locationJSON = locationsJSON.getJSONObject(j);
+				SphericalPolygon location = loadLocation(locationJSON);
+								
+				page.addLocation(location);
+			}
+		}
+		else if(!pageJSON.isNull("query")){
+			//do a query, load the locations into the page
+			LocationQueryResult queryResult = new LocationQueryResult(pageJSON.getString("query"));
+			Set<SphericalPolygon> locations = queryResult.getLocations();
+			for(SphericalPolygon location:locations){
+				page.addLocation(location);
+			}
+		}
 	}
 
 }

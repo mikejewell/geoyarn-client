@@ -14,6 +14,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 public class TriggerController{
@@ -24,16 +25,21 @@ public class TriggerController{
 	
 	AlarmManager alarmManager;
 	
+	GeoyarnClientApplication app;
+	
 	public TriggerController(Activity a){
 		
 		context = a;
 		storyController = new StoryEngine();
 		alarmManager = (AlarmManager)context.getSystemService(context.ALARM_SERVICE);
+		app = (GeoyarnClientApplication)context.getApplication();
+		Log.i("GeoYarn: ", "TriggerController");
 		
+		triggers=app.getChapter().getTriggers();
+		//triggers = new ArrayList<Trigger>();
 		
-		//triggers=c.getTriggers();
-		triggers = new ArrayList<Trigger>();
-				
+		Log.i("GeoYarn: ", "TriggerController trigs "+triggers.size());
+		
 		for(Trigger t:triggers){
 			
 			if(t instanceof AlarmTrigger){
@@ -41,8 +47,9 @@ public class TriggerController{
 				setAlarm(t.getChapter(),((AlarmTrigger)t).getAlarmTime().getTime());
 			}
 			else if(t instanceof TimerTrigger){
-				Toast.makeText(context, "TimerTrigger "+((TimerTrigger)t).getTimer(), Toast.LENGTH_SHORT).show();
-				setAlarm(t.getChapter(),new Date().getTime()+((TimerTrigger)t).getTimer());
+				Log.i("GeoYarn: ", "TimerTrigger "+((TimerTrigger)t).getTimer());
+				long timerMilli = ((TimerTrigger)t).getTimer()*1000;
+				setAlarm(t.getChapter(),new Date().getTime()+timerMilli);
 			}
 			
 		}	
@@ -51,9 +58,7 @@ public class TriggerController{
 	
 	public void setAlarm(int c, long time){
 		
-		GeoyarnClientApplication app = (GeoyarnClientApplication)context.getApplication();
 		app.setChapter(storyController.getChapter(app.getStory().getId(),c, app.getCurrentLat(), app.getCurrentLong()));
-		
 		Intent myIntent = new Intent(context , StoryActivity.class);     
 	    PendingIntent pendingIntent = PendingIntent.getService(context, 0, myIntent, 0);
 		

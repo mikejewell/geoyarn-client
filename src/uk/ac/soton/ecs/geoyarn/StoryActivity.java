@@ -60,7 +60,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		linkButtons = new ArrayList<Button>();
 		storyController = new StoryEngine();
 		locCont = new LocationController(this);
-		trigCont = new TriggerController(this);
+		
 
 		story = ((GeoyarnClientApplication) getApplication()).getStory();
 
@@ -70,6 +70,8 @@ public class StoryActivity extends Activity implements ILocationActivity {
 					story.getStartChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
+		
+		trigCont = new TriggerController(this);
 		
 		page = ((GeoyarnClientApplication) getApplication()).getPage();
 		

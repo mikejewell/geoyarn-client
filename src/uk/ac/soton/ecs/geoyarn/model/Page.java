@@ -56,4 +56,8 @@ public class Page {
 	public void setLocations(Set<SphericalPolygon> locations) {
 		this.locations = locations;
 	}
+	
+	public void addLocation(SphericalPolygon location) {
+		this.locations.add(location);
+	}
 }
