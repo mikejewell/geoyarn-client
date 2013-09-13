@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import uk.ac.soton.ecs.geoyarn.controller.LocationController;
 import uk.ac.soton.ecs.geoyarn.controller.StoryEngine;
+import uk.ac.soton.ecs.geoyarn.controller.TriggerController;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
@@ -31,6 +32,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 	ArrayList<Button> linkButtons;
 	StoryEngine storyController;
 	LocationController locCont;
+	TriggerController trigCont;
 
 	SharedPreferences settings;
 
@@ -58,6 +60,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		linkButtons = new ArrayList<Button>();
 		storyController = new StoryEngine();
 		locCont = new LocationController(this);
+		trigCont = new TriggerController(this);
 
 		story = ((GeoyarnClientApplication) getApplication()).getStory();
 
@@ -165,11 +168,9 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		} else {
 
 			((GeoyarnClientApplication) getApplication()).setPage(p);
-			chapter = storyController.getChapter(story.getId(),
-					p.getNextChapter(), app.getCurrentLat(), app.getCurrentLong());
+			chapter = storyController.getChapter(story.getId(),	p.getNextChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
-			Intent storyIntent = new Intent(getBaseContext(),
-					StoryActivity.class);
+			Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
 			startActivity(storyIntent);
 		}
 	}

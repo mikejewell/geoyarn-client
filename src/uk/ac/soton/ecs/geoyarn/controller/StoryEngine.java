@@ -16,9 +16,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import uk.ac.soton.ecs.geoyarn.model.AlarmTrigger;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
 import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
+import uk.ac.soton.ecs.geoyarn.model.TimerTrigger;
+import uk.ac.soton.ecs.geoyarn.model.Trigger;
 import android.location.Location;
 import android.util.Log;
 
@@ -95,8 +98,34 @@ public class StoryEngine {
 							.add(new SphericalPolygon(points
 									.toArray(new Point[] {})));
 				}
-				chapter.getPages().add(page);
-
+				//chapter.getPages().add(page);
+				chapter.addPage(page);
+			}
+			
+			//Build Triggers
+			JSONArray triggersJSON = chapterJSON.getJSONArray("triggers");
+			for (int i = 0; i < triggersJSON.length(); i++) {
+				
+				Trigger trigger=new Trigger();
+				
+				JSONObject triggerJSON = triggersJSON.getJSONObject(i);
+				int triggerType = triggerJSON.getInt("type");
+				
+				switch(triggerType){
+					//Timer
+					case 0:
+						trigger = new TimerTrigger(triggerJSON.getInt("id"), triggerJSON.getInt("chapter"), triggerJSON.getInt("timer"));						
+						break;
+					//Alarm
+					case 1: 
+						trigger = new AlarmTrigger(triggerJSON.getInt("id"), triggerJSON.getInt("chapter"), triggerJSON.getString("alarm"));						
+						break;
+					//Other
+					case 2: 
+						break;
+				}				
+			
+				chapter.addTrigger(trigger);
 			}
 
 		} catch (Exception e) {

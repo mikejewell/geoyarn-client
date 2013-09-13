@@ -26,4 +26,13 @@
 			}
 		]
 	}]
+	"triggers":[
+		{
+			"id":0,
+			"type":0,
+			"chapter":6,
+			"timer":10		
+		}
+	
+	]
 }
