@@ -5,6 +5,7 @@ import uk.ac.soton.ecs.geoyarn.model.Page;
 import uk.ac.soton.ecs.geoyarn.model.Story;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Application class to provide the global context.
@@ -40,6 +41,7 @@ public class GeoyarnClientApplication extends Application
 	}
 	
 	public void setChapter(Chapter c){
+		//Log.i("GeoYarn: ","SET CHAPTER "+c.getId());
 		currentChapter = c;
 	}
 	

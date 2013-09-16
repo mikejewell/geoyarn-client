@@ -1,5 +1,6 @@
 package uk.ac.soton.ecs.geoyarn.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,37 +9,22 @@ import nsidc.spheres.SphericalPolygon;
 
 public class LocationQueryResult{
 
-	private Set<SphericalPolygon> locations;
-	HashMap<String, String> metadata;
+	ArrayList<LocationQueryResultLocation> locations;
 	
 	public LocationQueryResult(){
-		locations = new HashSet<SphericalPolygon>();
-		metadata = new HashMap<String,String>();
-		
-		//Make and parse Query here
-	}	
-	
-	public String getMetaData(String key){
-		return metadata.get(key);		
+		locations = new ArrayList<LocationQueryResultLocation>();
 	}
 	
-	public Set<SphericalPolygon> getLocations(){
+	public ArrayList<LocationQueryResultLocation> getLocations(){
 		return locations;
 	}
 	
-	public void setMetaData(HashMap<String, String> md){
-		metadata=md;
-	}
-	
-	public void setLocations(Set<SphericalPolygon> locs){
+	public void setLocations(ArrayList<LocationQueryResultLocation> locs){
 		locations=locs;
 	}
 	
-	public void addMetaData(String key, String value){
-		metadata.put(key, value);
-	}
-	
-	public void addLocations(SphericalPolygon loc){
+	public void addLocation(LocationQueryResultLocation loc){
 		locations.add(loc);
 	}
+	
 }

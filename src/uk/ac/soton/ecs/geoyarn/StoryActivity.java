@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -47,6 +48,8 @@ public class StoryActivity extends Activity implements ILocationActivity {
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
+		Log.i("GeoYarn: ","STARTING STORY ACTIVITY");
+		
 		app = (GeoyarnClientApplication) getApplication();
 		
 		super.onCreate(savedInstanceState);
@@ -64,17 +67,24 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 		story = ((GeoyarnClientApplication) getApplication()).getStory();
 
+		
+		
 		chapter = ((GeoyarnClientApplication) getApplication()).getChapter();
 		if (chapter == null) {
 			chapter = storyController.getChapter(story.getId(),
 					story.getStartChapter(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
+		else{
+			Log.i("GeoYarn: ","CHAP NOT NULL");
+		}
 		
 		trigCont = new TriggerController(this);
 		
 		page = ((GeoyarnClientApplication) getApplication()).getPage();
 		
+		
+		//Log.i("GeoYarn: ","PAGE "+page.getContent());
 		//Toast.makeText(this, "Start! Page:"+page.getId()+" Chapter:"+chapter.getId()+" Story:"+story.getId(), Toast.LENGTH_SHORT).show();
 
 		TextView storyTitleTv = (TextView) findViewById(R.id.StoryTitle);
@@ -84,8 +94,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		if (page != null) {
 			pageContentTv.setText(page.getContent());
 		} else {
-			pageContentTv
-					.setText(getResources().getString(R.string.storyBegin));
+			pageContentTv.setText(getResources().getString(R.string.storyBegin));
 		}
 
 		LinearLayout storyLinkList = (LinearLayout) findViewById(R.id.StoryLinksList);
@@ -96,7 +105,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 		for (Page p : chapter.getPages()) {
 			// This ||true is a debug trick - change this
-			
+			Log.i("GeoYarn: ","Making Buttons "+chapter.getId()+" "+chapter.getPages().size());
 			if (page == null || page.getId() != p.getId()) {				
 				Button linkButton = new Button(this);
 				linkButton.setText(p.getDescription());
@@ -128,21 +137,6 @@ public class StoryActivity extends Activity implements ILocationActivity {
 			}
 		}
 
-		// Location l = new Location(LocationManager.GPS_PROVIDER);
-
-		// Fake stag's head data
-		// l.setLatitude(50.934601);
-		// l.setLongitude(-1.397424);
-		// Fake B32 data
-		// l.setLatitude(50.93638279940933);
-		// l.setLongitude(-1.3961811549961567);
-
-		// Fake interchange kiosk data
-		// l.setLatitude(50.9362519);
-		// l.setLongitude(-1.3970872);
-
-		// onLocationChanged(l);
-		// Toast.makeText(this, "Start!", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -171,6 +165,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 
 			((GeoyarnClientApplication) getApplication()).setPage(p);
 			chapter = storyController.getChapter(story.getId(),	p.getNextChapter(), app.getCurrentLat(), app.getCurrentLong());
+			Log.i("GeoYarn: ","SETTING CHAPTER "+story.getId()+" "+p.getNextChapter()+" "+app.getCurrentLat()+" "+app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 			Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
 			startActivity(storyIntent);
