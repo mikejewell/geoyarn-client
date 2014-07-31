@@ -1,0 +1,38 @@
+{
+	"id":1,
+	"pages":[
+	{
+		"id":1, 
+		"description":"This story begins beside a busy road.", 
+
+		"content":"IIt had been years since I’d been here, and while I remembered the place fondly, I was still left with a strange feeling of guilt for my own neglect of the place. Why had it been so long since I’d returned? The buildings themselves stared at me like a disapproving relative suspicious of my sudden arrival. The journey had not been a long one, but it had been uncomfortable, and hot, and I was eager to leave the car and begin my business. I wasn’t to be here long, and saw no reason for delay.",
+		"next_chapter":2,
+		"locations":
+		[
+			{
+			"polygon":[{"lat":"50.9345783", "lon":"-1.3974006"},
+				{"lat":"50.9348699", "lon":"-1.3975707"},
+				{"lat":"50.93492", "lon":"-1.3973133"},
+				{"lat":"50.9349321", "lon":"-1.397251"},
+				{"lat":"50.9348746", "lon":"-1.3972157"},
+				{"lat":"50.9348699", "lon":"-1.3972353"},
+				{"lat":"50.9348559", "lon":"-1.3972276"},
+				{"lat":"50.9347942", "lon":"-1.3971935"},
+				{"lat":"50.9347355", "lon":"-1.3971541"},
+				{"lat":"50.9347187", "lon":"-1.3971428"},
+				{"lat":"50.9347251", "lon":"-1.3971257"},
+				{"lat":"50.9346499", "lon":"-1.3970764"},
+				{"lat":"50.9345911", "lon":"-1.3973427"}]
+			}
+		]
+	}],
+	"triggers":[
+		{
+			"id":0,
+			"type":0,
+			"chapter":2,
+			"timer":10		
+		}
+	
+	]
+}

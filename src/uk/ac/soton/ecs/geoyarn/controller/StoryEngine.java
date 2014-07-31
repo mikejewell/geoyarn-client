@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import uk.ac.soton.ecs.geoyarn.GeoyarnClientApplication;
+import uk.ac.soton.ecs.geoyarn.JSONLoader;
 import uk.ac.soton.ecs.geoyarn.R;
 import uk.ac.soton.ecs.geoyarn.model.AlarmTrigger;
 import uk.ac.soton.ecs.geoyarn.model.Chapter;
@@ -46,9 +47,7 @@ import android.util.Log;
 public class StoryEngine {
 
 	private static final String TAG = "StoryController";
-	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
-	//private static final String BASE = "http://wais-demo.ecs.soton.ac.uk/geoyarn/";
-	//private static final String NEW_BASE = "http://www.yarnspinner.ecs.soton.ac.uk/";
+	
 	private static final String BASE = "http://www.yarnspinner.ecs.soton.ac.uk/data/";
 	
 	private static final String LOC_BASE = "http://tools.southampton.ac.uk/places/";
@@ -60,10 +59,9 @@ public class StoryEngine {
 				
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
-			//String storyText = this.getURL(BASE +"story/");
-			//String storyText = this.getURL(BASE +"yarns?nocache="+System.currentTimeMillis());
-			String storyText = this.getURL(BASE +"yarns");
-			//String storyText = this.getURL(NEW_BASE +"yarns");
+			//String storyText = this.getURL(BASE +"yarns");
+			String storyText = JSONLoader.loadFileContents(R.raw.stories);//Test from raw
+						
 			Log.i("GeoYarn: ", "StoryList: "+storyText);
 			
 			JSONArray storiesJSON = new JSONArray(storyText);
@@ -99,17 +97,21 @@ public class StoryEngine {
 		Chapter chapter = new Chapter();
 		try {
 			String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
-			//String chapterText = this.getURL(NEW_BASE+"testfiles/"+chapterid+".json?nocache="+System.currentTimeMillis());
-			//String chapterText = this.getURL("http://www.yarnspinner.ecs.soton.ac.uk/data/chapter/"+chapterid);
+			//Debug from RAWs
+			switch(chapterid){
+				case 1: chapterText = JSONLoader.loadFileContents(R.raw.recoil_1); break;
+				case 2: chapterText = JSONLoader.loadFileContents(R.raw.recoil_2); break;
+				case 3: chapterText = JSONLoader.loadFileContents(R.raw.recoil_3); break;
+				case 4: chapterText = JSONLoader.loadFileContents(R.raw.recoil_4); break;
+			}
+			
+			
 			
 			chapterText=chapterText.replace("\n", "");
 			chapterText=chapterText.replace("\r", "");
 			
 			Log.i("GeoYarn: ", "ChapText "+BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
-			//Log.i("GeoYarn: ", "ChapText "+NEW_BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
-			//Log.i("GeoYarn: ", "ChapText "+"http://www.yarnspinner.ecs.soton.ac.uk/data/chapter/"+chapterid+" "+chapterText);
-			
-			
+						
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
 			

@@ -1,0 +1,29 @@
+{
+	"id":4,
+	"pages":[
+	{
+		"id":10, 
+		"title":"In the shadow of a large building.", 
+		"content":"I wandered thoughtfully away for some time, away from the road, and the trees, until I saw it. It loomed in my vision ahead, the great shadow of a giant of brick and glass, of concrete and steel. I had always remembered it as something smaller, but now the old building seemed to tower above with walls unchanged by time. I touched its walls and remembered the time I had first come here, when I had first gazed up at the face of this place and smiled. It felt back then that I would never leave, that I had found my place in the world. I was wrong, as people often are, and time had seen us travel far apart. We had both changed, in ways neither of us understood. I put the piece of paper back in my bag, Ford could wait, and took it off my shoulder. I leant against the brick work, and pretended, just for a moment, I had never left.",
+		"next_chapter":4,
+		"locations":
+		[
+			{
+				"polygon":[
+				{"lat":"50.9345783", "lon":"-1.3974006"},
+				{"lat":"50.9348699", "lon":"-1.3975707"},
+				{"lat":"50.93492", "lon":"-1.3973133"},
+				{"lat":"50.9349321", "lon":"-1.397251"},
+				{"lat":"50.9348746", "lon":"-1.3972157"},
+				{"lat":"50.9348699", "lon":"-1.3972353"},
+				{"lat":"50.9348559", "lon":"-1.3972276"},
+				{"lat":"50.9347942", "lon":"-1.3971935"},
+				{"lat":"50.9347355", "lon":"-1.3971541"},
+				{"lat":"50.9347187", "lon":"-1.3971428"},
+				{"lat":"50.9347251", "lon":"-1.3971257"},
+				{"lat":"50.9346499", "lon":"-1.3970764"},
+				{"lat":"50.9345911", "lon":"-1.3973427"}]
+			}
+		]
+	}]
+}
