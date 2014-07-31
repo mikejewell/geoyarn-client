@@ -19,6 +19,7 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -87,14 +88,14 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		//Log.i("GeoYarn: ","PAGE "+page.getContent());
 		//Toast.makeText(this, "Start! Page:"+page.getId()+" Chapter:"+chapter.getId()+" Story:"+story.getId(), Toast.LENGTH_SHORT).show();
 
-		TextView storyTitleTv = (TextView) findViewById(R.id.StoryTitle);
-		storyTitleTv.setText(story.getTitle());
+		TextView storyTitleWv = (TextView) findViewById(R.id.StoryTitle);
+		storyTitleWv.setText(story.getTitle());
 
-		TextView pageContentTv = (TextView) findViewById(R.id.StoryPageContent);
+		WebView pageContentWv = (WebView) findViewById(R.id.StoryPageContent);
 		if (page != null) {
-			pageContentTv.setText(page.getContent());
+			pageContentWv.loadData(page.getContent(), "text/html", null);
 		} else {
-			pageContentTv.setText(getResources().getString(R.string.storyBegin));
+			pageContentWv.loadData(getResources().getString(R.string.storyBegin), "text/html", null);
 		}
 
 		LinearLayout storyLinkList = (LinearLayout) findViewById(R.id.StoryLinksList);
