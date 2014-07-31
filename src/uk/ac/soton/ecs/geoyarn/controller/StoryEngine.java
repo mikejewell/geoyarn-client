@@ -47,9 +47,9 @@ public class StoryEngine {
 
 	private static final String TAG = "StoryController";
 	//private static final String BASE = "http://lab.thecollectedmike.com/yarn/";
-	private static final String BASE = "http://wais-demo.ecs.soton.ac.uk/geoyarn/";
-	private static final String NEW_BASE = "http://www.yarnspinner.ecs.soton.ac.uk/";
-	//private static final String BASE = "http://www.yarnspinner.ecs.soton.ac.uk/data/";
+	//private static final String BASE = "http://wais-demo.ecs.soton.ac.uk/geoyarn/";
+	//private static final String NEW_BASE = "http://www.yarnspinner.ecs.soton.ac.uk/";
+	private static final String BASE = "http://www.yarnspinner.ecs.soton.ac.uk/data/";
 	
 	private static final String LOC_BASE = "http://tools.southampton.ac.uk/places/";
 	
@@ -60,9 +60,10 @@ public class StoryEngine {
 				
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
-			String storyText = this.getURL(BASE +"story/");
+			//String storyText = this.getURL(BASE +"story/");
 			//String storyText = this.getURL(BASE +"yarns?nocache="+System.currentTimeMillis());
-			//String storyText = this.getURL(BASE +"yarns");
+			String storyText = this.getURL(BASE +"yarns");
+			//String storyText = this.getURL(NEW_BASE +"yarns");
 			Log.i("GeoYarn: ", "StoryList: "+storyText);
 			
 			JSONArray storiesJSON = new JSONArray(storyText);
@@ -97,14 +98,15 @@ public class StoryEngine {
 		
 		Chapter chapter = new Chapter();
 		try {
-			//String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
-			String chapterText = this.getURL(NEW_BASE+"testfiles/"+chapterid+".json?nocache="+System.currentTimeMillis());
+			String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
+			//String chapterText = this.getURL(NEW_BASE+"testfiles/"+chapterid+".json?nocache="+System.currentTimeMillis());
 			//String chapterText = this.getURL("http://www.yarnspinner.ecs.soton.ac.uk/data/chapter/"+chapterid);
 			
 			chapterText=chapterText.replace("\n", "");
 			chapterText=chapterText.replace("\r", "");
 			
-			Log.i("GeoYarn: ", "ChapText "+NEW_BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
+			Log.i("GeoYarn: ", "ChapText "+BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
+			//Log.i("GeoYarn: ", "ChapText "+NEW_BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
 			//Log.i("GeoYarn: ", "ChapText "+"http://www.yarnspinner.ecs.soton.ac.uk/data/chapter/"+chapterid+" "+chapterText);
 			
 			
