@@ -1,11 +1,12 @@
 {
 	"id":2,
+	"uri":2,
 	"pages":[
 	{
 		"id":6, 
 		"title":"Head indoors.", 
-		"content":"I quickly made my way inside, out of the stifling weather and into the cool breeze of the air conditioned hall. The place was clean, and smelt new. Something further evidenced by the pristine, seemingly untouched, catalogue furniture that lay carefully arranged in the reception area. I didn't know this place, the familiarity that greeted my arrival now replaced with a sense of intrusion. Of not belonging. I sighed and reached into my bag, eager to get to work, and retrieved my paperwork. Crude print outs and scribbles directing where I needed to be and why, this was the tenth such visit on my trip and I had more to come. Ford, the man I was looking for was Ford. No building number, no room number, just this street and ‘Ford'. Woefully ill equipped I glanced at the reception desk, hoping to find some eager to help, but bored and not too busy, staff. But I was to be disappointed by an empty chair staring back at me. Regardless I began my search, walking down corridors and peering into rooms, eagerly hoping for a sign that might lead me to Ford's office or a person that might assist me. But I found nothing. Only endless empty rooms, and corridors that smelt of fresh paint and new carpet. This was, obviously, not where I was meant to be and I made my way through a side door and outside again. Down the path I went, and towards another set of buildings partially obscured by trees. Perhaps there I would find ‘Ford'.",
-		"next_chapter":3,
+		"content":"I quickly made my way inside, out of the stifling weather and into the cool breeze of the air conditioned hall. The place was clean, and smelt new. Something further evidenced by the pristine, seemingly untouched, catalogue furniture that lay carefully arranged in the reception area. I didn't know this place, the familiarity that greeted my arrival now replaced with a sense of intrusion. Of not belonging. I sighed and reached into my bag, eager to get to work, and retrieved my paperwork. Crude print outs and scribbles directing where I needed to be and why, this was the tenth such visit on my trip and I had more to come. Ford, the man I was looking for was Ford. No building number, no room number, just this street and ‘Ford'. Woefully ill equipped I glanced at the reception desk, hoping to find some eager to help, but bored and not too busy, staff. But I was to be disappointed by an empty chair staring back at me. Regardless I began my search, walking down corridors and peering into rooms, eagerly hoping for a sign that might lead me to Ford's office or a person that might assist me. But I found nothing. Only endless empty rooms, and corridors that smelt of fresh paint and new carpet. This was, obviously, not where I was meant to be and I made my way through a side door and outside again. Down the path I went, and towards another set of buildings partially obscured by trees. Perhaps there I would find 'Ford'.",
+		"nextchapteruri":3,
 		"locations":
 		[
 			{
@@ -31,7 +32,7 @@
 		"id":7,
 		"title":"Or perhaps somewhere green?",
 		"content":"As I quickly made my way along the path I found myself distracted by the greenery. I began to realise that part of the reason for my uncomfortable journey was that I didn't really want to be here. While I held fond memories of the place and was at first pleased by its familiar silhouette and sounds it had been too long, and the reason I was here held no real interest for me. I looked at the paper again, 'Ford', a name that meant nothing to me, much as I no longer meant anything to this place. I sat for a moment at the base of one of the trees and set down my bag, and papers. I elected that after all there was no rush, and that anything that needed doing could be done when I wanted it. The tree had begun to turn and atop its gnarled and twisted trunk sat a carpet of faintly yellow leaves. Not yet red, but a mix of green and yellow, a mark of late September upon the foliage. As I idly twisted and folded a fallen leaf I spotted a narrow path leading beyond the trees away from me, I stood, and lazily wandered along its route.",
-		"next_chapter":3,
+		"nextchapteruri":3,
 		"locations":[
 			{
 				"type":"polygon",

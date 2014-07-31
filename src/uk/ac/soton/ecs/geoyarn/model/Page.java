@@ -9,7 +9,7 @@ public class Page {
 	private int id;
 	private String content;
 	private String description;
-	private int nextChapter;
+	private String nextChapterURI;
 	private Set<SphericalPolygon> locations;
 
 	
@@ -33,12 +33,12 @@ public class Page {
 		this.content = content;
 	}
 
-	public int getNextChapter() {
-		return nextChapter;
+	public String getNextChapterURI() {
+		return nextChapterURI;
 	}
 
-	public void setNextChapter(int nextChapter) {
-		this.nextChapter = nextChapter;
+	public void setNextChapterURI(String nextChapter) {
+		this.nextChapterURI = nextChapter;
 	}
 
 	public String getDescription() {
@@ -60,4 +60,5 @@ public class Page {
 	public void addLocation(SphericalPolygon location) {
 		this.locations.add(location);
 	}
+
 }

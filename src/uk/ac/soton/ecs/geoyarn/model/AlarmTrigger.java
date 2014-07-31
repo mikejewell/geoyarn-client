@@ -10,10 +10,10 @@ public class AlarmTrigger extends TimeTrigger{
 	
 	private Date alarmTime;
 	
-	public AlarmTrigger(int i, int c, String ats){
+	public AlarmTrigger(int i, String curi, String ats){
 				
 		setId(i);
-		setChapter(c);
+		setChapterURI(curi);
 		
 	    DateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
 	    try {

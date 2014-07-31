@@ -71,7 +71,8 @@ public class StoryEngine {
 				Story story = new Story();
 				story.setTitle(storyJSON.getString("title"));
 				story.setId(storyJSON.getInt("id"));
-				story.setStartChapter(storyJSON.getInt("start_chapter_id"));
+				story.setURI(storyJSON.getString("uri"));
+				story.setStartChapter(storyJSON.getString("startchapteruri"));
 				stories.add(story);
 			}
 
@@ -82,40 +83,37 @@ public class StoryEngine {
 		return stories;
 	}
 
-	public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
-		
-		//////debug
-		try {
-			locationQuery("green", boundingBox);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		///////////
-		
+	//public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
+	public Chapter getChapter(int storyid, String chapterURI, double latitude, double longitude) {
+				
 		Chapter chapter = new Chapter();
 		try {
-			String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
+			//String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
+			//String chapterText = this.getURL(chapterURI+"?lat="+latitude+"&long="+longitude);
+			String chapterText = this.getURL(BASE+"chapter/"+chapterURI+"?lat="+latitude+"&long="+longitude);
+			
 			//Debug from RAWs
-			switch(chapterid){
+			/*switch(chapterid){
 				case 1: chapterText = JSONLoader.loadFileContents(R.raw.recoil_1); break;
 				case 2: chapterText = JSONLoader.loadFileContents(R.raw.recoil_2); break;
 				case 3: chapterText = JSONLoader.loadFileContents(R.raw.recoil_3); break;
 				case 4: chapterText = JSONLoader.loadFileContents(R.raw.recoil_4); break;
-			}
-			
+			}*/
+			if(chapterURI.equals("1")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_1);}
+			else if(chapterURI.equals("2")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_2);}
+			else if(chapterURI.equals("3")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_3);}
+			else if(chapterURI.equals("4")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_4);}			
 			
 			
 			chapterText=chapterText.replace("\n", "");
 			chapterText=chapterText.replace("\r", "");
 			
-			Log.i("GeoYarn: ", "ChapText "+BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
+			//Log.i("GeoYarn: ", "ChapText "+BASE+"testfiles/"+chapterid+".json"+" "+chapterText);
+			Log.i("GeoYarn: ", "ChapText "+chapterURI+" "+chapterText);
 						
 			JSONObject chapterJSON = new JSONObject(chapterText);
 			chapter.setId(chapterJSON.getInt("id"));
+			chapter.setURI(chapterJSON.getString("uri"));
 			
 			// Build pages
 			JSONArray pagesJSON=null;
@@ -147,13 +145,13 @@ public class StoryEngine {
 					page.setDescription("");
 				}
 				
-				if(!pageJSON.isNull("next_chapter")){
-					page.setNextChapter(pageJSON.getInt("next_chapter"));
-					Log.i("GeoYarn: ",chapter.getId()+" NEXT CHAP "+ pageJSON.getInt("next_chapter"));
+				if(!pageJSON.isNull("nextchapteruri")){
+					page.setNextChapterURI(pageJSON.getString("nextchapteruri"));
+					Log.i("GeoYarn: ",chapter.getId()+" NEXT CHAP "+ pageJSON.getString("nextchapteruri"));
 				}
 				else{
-					page.setNextChapter(chapter.getId());
-					Log.i("GeoYarn: ",chapter.getId()+" BAD NEXT CHAP "+ pageJSON.getInt("next_chapter"));
+					page.setNextChapterURI(chapter.getURI());
+					Log.i("GeoYarn: ",chapter.getId()+" BAD NEXT CHAP "+ pageJSON.getString("nextchapteruri"));
 				}
 
 				loadLocations(page, pageJSON);
@@ -175,11 +173,11 @@ public class StoryEngine {
 				switch(triggerType){
 					//Timer
 					case 0:
-						trigger = new TimerTrigger(triggerJSON.getInt("id"), triggerJSON.getInt("chapter"), triggerJSON.getInt("timer"));						
+						trigger = new TimerTrigger(triggerJSON.getInt("id"), triggerJSON.getString("chapteruri"), triggerJSON.getInt("timer"));						
 						break;
 					//Alarm
 					case 1: 
-						trigger = new AlarmTrigger(triggerJSON.getInt("id"), triggerJSON.getInt("chapter"), triggerJSON.getString("alarm"));						
+						trigger = new AlarmTrigger(triggerJSON.getInt("id"), triggerJSON.getString("chapteruri"), triggerJSON.getString("alarm"));						
 						break;
 					//Other
 					case 2: 

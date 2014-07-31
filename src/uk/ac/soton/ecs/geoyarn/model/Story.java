@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class Story {
 	private int id;
+	private String URI;
 
 	private String title;
 	private String description;
 	private Date publishedDate;
-	private int startChapter;
+	private String startChapterURI;
 
 	public int getId() {
 		return id;
@@ -16,6 +17,14 @@ public class Story {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String u) {
+		this.URI = u;
 	}
 
 	public String getTitle() {
@@ -42,11 +51,12 @@ public class Story {
 		this.publishedDate = publishedDate;
 	}
 
-	public int getStartChapter() {
-		return startChapter;
+	public String getStartChapterURI() {
+		return startChapterURI;
 	}
 
-	public void setStartChapter(int startChapter) {
-		this.startChapter = startChapter;
-	}
+	public void setStartChapter(String startChapter) {
+		this.startChapterURI = startChapter;
+	}	
+	
 }

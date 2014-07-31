@@ -44,21 +44,21 @@ public class TriggerController{
 			
 			if(t instanceof AlarmTrigger){
 				
-				setAlarm(t.getChapter(),((AlarmTrigger)t).getAlarmTime().getTime());
+				setAlarm(t.getChapterURI(),((AlarmTrigger)t).getAlarmTime().getTime());
 			}
 			else if(t instanceof TimerTrigger){
 				Log.i("GeoYarn: ", "TimerTrigger "+((TimerTrigger)t).getTimer());
 				long timerMilli = ((TimerTrigger)t).getTimer()*1000;
-				setAlarm(t.getChapter(),new Date().getTime()+timerMilli);
+				setAlarm(t.getChapterURI(),new Date().getTime()+timerMilli);
 			}
 			
 		}	
 		
 	}
 	
-	public void setAlarm(int c, long time){
+	public void setAlarm(String curi, long time){
 		
-		app.setChapter(storyController.getChapter(app.getStory().getId(),c, app.getCurrentLat(), app.getCurrentLong()));
+		app.setChapter(storyController.getChapter(app.getStory().getId(),curi, app.getCurrentLat(), app.getCurrentLong()));
 		Intent myIntent = new Intent(context , StoryActivity.class);     
 	    PendingIntent pendingIntent = PendingIntent.getService(context, 0, myIntent, 0);
 		

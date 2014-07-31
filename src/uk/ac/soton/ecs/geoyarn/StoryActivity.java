@@ -73,7 +73,7 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		chapter = ((GeoyarnClientApplication) getApplication()).getChapter();
 		if (chapter == null) {
 			chapter = storyController.getChapter(story.getId(),
-					story.getStartChapter(), app.getCurrentLat(), app.getCurrentLong());
+					story.getStartChapterURI(), app.getCurrentLat(), app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 		}
 		else{
@@ -165,8 +165,8 @@ public class StoryActivity extends Activity implements ILocationActivity {
 		} else {
 
 			((GeoyarnClientApplication) getApplication()).setPage(p);
-			chapter = storyController.getChapter(story.getId(),	p.getNextChapter(), app.getCurrentLat(), app.getCurrentLong());
-			Log.i("GeoYarn: ","SETTING CHAPTER "+story.getId()+" "+p.getNextChapter()+" "+app.getCurrentLat()+" "+app.getCurrentLong());
+			chapter = storyController.getChapter(story.getId(),	p.getNextChapterURI(), app.getCurrentLat(), app.getCurrentLong());
+			Log.i("GeoYarn: ","SETTING CHAPTER "+story.getId()+" "+p.getNextChapterURI()+" "+app.getCurrentLat()+" "+app.getCurrentLong());
 			((GeoyarnClientApplication) getApplication()).setChapter(chapter);
 			Intent storyIntent = new Intent(getBaseContext(), StoryActivity.class);
 			startActivity(storyIntent);

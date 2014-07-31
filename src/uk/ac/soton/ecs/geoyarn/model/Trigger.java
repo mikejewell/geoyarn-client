@@ -3,7 +3,7 @@ package uk.ac.soton.ecs.geoyarn.model;
 public class Trigger{
 	
 	private int id;
-	private int chapter;
+	private String chapteruri;
 	
 	public void setId (int i){
 		id=i;
@@ -13,12 +13,12 @@ public class Trigger{
 		return id;
 	}
 	
-	public void setChapter (int c){
-		chapter = c;
+	public void setChapterURI (String c){
+		chapteruri = c;
 	}
 	
-	public int getChapter(){
-		return chapter;
+	public String getChapterURI(){
+		return chapteruri;
 	}
 	
 }

@@ -10,10 +10,10 @@ public class TimerTrigger extends TimeTrigger{
 	
 private int timer;
 	
-	public TimerTrigger(int i, int c, int t){
+	public TimerTrigger(int i, String curi, int t){
 				
 		setId(i);
-		setChapter(c);
+		setChapterURI(curi);
 		timer=t;	    
 	}
 	

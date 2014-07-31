@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Chapter {
 	private int id;
+	private String URI;
 	private Set<Page> pages;
 	ArrayList<Trigger> triggers;
 	
@@ -19,6 +20,13 @@ public class Chapter {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getURI() {
+		return URI;
+	}
+	public void setURI(String u) {
+		this.URI = u;
 	}
 	
 	public void addPage(Page page) {
