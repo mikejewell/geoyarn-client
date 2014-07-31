@@ -84,6 +84,7 @@ public class StoryEngine {
 
 	public Chapter getChapter(int storyid, int chapterid, double latitude, double longitude) {
 		
+		//////debug
 		try {
 			locationQuery("green", boundingBox);
 		} catch (JSONException e1) {
@@ -93,6 +94,7 @@ public class StoryEngine {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		///////////
 		
 		Chapter chapter = new Chapter();
 		try {
@@ -198,8 +200,8 @@ public class StoryEngine {
 		
 		String content = page.getContent();
 
-		while(content.contains("<")&&content.contains(">")){
-			String query = content.substring(content.indexOf("<")+1,content.indexOf(">"));
+		while(content.contains("{{")&&content.contains("}}")){
+			String query = content.substring(content.indexOf("{{")+1,content.indexOf("}}"));
 			try{
 				LocationQueryResult queryResult = locationQuery(query, boundingBox);
 				
@@ -312,11 +314,9 @@ public class StoryEngine {
 	}
 	
 	
-	public SphericalPolygon loadLocation(JSONObject locationJSON) throws JSONException{
+	public SphericalPolygon loadPolygonLocation(JSONArray polygonJSON) throws JSONException{
 		SphericalPolygon location = null;
 		
-		JSONArray polygonJSON = locationJSON.getJSONArray("polygon");
-					
 		// Get each point array
 		ArrayList<Point> points = new ArrayList<Point>();
 		for (int k = 0; k < polygonJSON.length(); k++) {
@@ -332,10 +332,22 @@ public class StoryEngine {
 		return location;
 	}
 	
+	public ArrayList<SphericalPolygon> loadQueryLocation(String query) throws JSONException, UnsupportedEncodingException{
+		ArrayList<SphericalPolygon> locs = new ArrayList<SphericalPolygon>();
+		
+		LocationQueryResult queryResult = locationQuery(query,boundingBox);
+		ArrayList<LocationQueryResultLocation> locations = queryResult.getLocations();
+		for(LocationQueryResultLocation location:locations){
+			locs.add(location.getLocation());
+		}
+		
+		return locs;
+	}
+	
 	public void loadLocations(Page page, JSONObject pageJSON) throws JSONException, UnsupportedEncodingException{
 		// Build locations
 		
-		if(!pageJSON.isNull("locations")){
+		/*if(!pageJSON.isNull("locations")){
 		
 			JSONArray locationsJSON = pageJSON.getJSONArray("locations");
 			// Get each location
@@ -353,7 +365,34 @@ public class StoryEngine {
 			for(LocationQueryResultLocation location:locations){
 				page.addLocation(location.getLocation());
 			}
+		}*/
+		
+		
+		if(!pageJSON.isNull("locations")){
+			
+			JSONArray locationsJSON = pageJSON.getJSONArray("locations");
+			
+			for (int j = 0; j < locationsJSON.length(); j++) {
+				JSONObject locationJSON = locationsJSON.getJSONObject(j);
+				
+				String type = locationJSON.getString("type");
+				
+				if(type.equals("polygon")){
+					page.addLocation(loadPolygonLocation(locationJSON.getJSONArray("location")));
+				}
+				else if(type.equals("point")){
+					//TODO: Make a circle from a point and radius
+				}
+				else if(type.equals("query")){
+					for(SphericalPolygon loc:loadQueryLocation(locationJSON.getString("location"))){
+						page.addLocation(loc);
+					}
+				}
+				
+			}
+			
 		}
+		
 	}
 		
 	public LocationQueryResult locationQuery(String query, String[] boundingBox) throws JSONException, UnsupportedEncodingException{

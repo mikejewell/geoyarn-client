@@ -9,7 +9,8 @@
 		"locations":
 		[
 			{
-				"polygon":[
+				"type":"polygon",
+				"location":[
 				{"lat":"50.9345783", "lon":"-1.3974006"},
 				{"lat":"50.9348699", "lon":"-1.3975707"},
 				{"lat":"50.93492", "lon":"-1.3973133"},
@@ -29,11 +30,12 @@
 	{
 		"id":7,
 		"title":"Or perhaps somewhere green?",
-		"content":"As I quickly made my way along the path I found myself distracted by the greenery. I began to realise that part of the reason for my uncomfortable journey was that I didn't really want to be here. While I held fond memories of the place and was at first pleased by its familiar silhouette and sounds it had been too long, and the reason I was here held no real interest for me. I looked at the paper again, ‘Ford', a name that meant nothing to me, much as I no longer meant anything to this place. I sat for a moment at the base of one of the trees and set down my bag, and papers. I elected that after all there was no rush, and that anything that needed doing could be done when I wanted it. The tree had begun to turn and atop its gnarled and twisted trunk sat a carpet of faintly yellow leaves. Not yet red, but a mix of green and yellow, a mark of late September upon the foliage. As I idly twisted and folded a fallen leaf I spotted a narrow path leading beyond the trees away from me, I stood, and lazily wandered along its route.",
+		"content":"As I quickly made my way along the path I found myself distracted by the greenery. I began to realise that part of the reason for my uncomfortable journey was that I didn't really want to be here. While I held fond memories of the place and was at first pleased by its familiar silhouette and sounds it had been too long, and the reason I was here held no real interest for me. I looked at the paper again, 'Ford', a name that meant nothing to me, much as I no longer meant anything to this place. I sat for a moment at the base of one of the trees and set down my bag, and papers. I elected that after all there was no rush, and that anything that needed doing could be done when I wanted it. The tree had begun to turn and atop its gnarled and twisted trunk sat a carpet of faintly yellow leaves. Not yet red, but a mix of green and yellow, a mark of late September upon the foliage. As I idly twisted and folded a fallen leaf I spotted a narrow path leading beyond the trees away from me, I stood, and lazily wandered along its route.",
 		"next_chapter":3,
 		"locations":[
 			{
-				"polygon":[
+				"type":"polygon",
+				"location":[
 				{"lat":"50.9368361", "lon":"-1.3960819"},
 				{"lat":"50.9360262", "lon":"-1.3959387"},
 				{"lat":"50.9360409", "lon":"-1.3956739"},
