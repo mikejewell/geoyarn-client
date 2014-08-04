@@ -1,0 +1,174 @@
+{
+	"id":0,
+	"uri":"wall0_1",
+	"pages":[
+		{
+			"id":1, 
+			"title":"The Bargate.", 
+			"content":"The Bargate was built around 1180 to keep out intruders and impress visitors. It had a team of gunners to defend the town and three guns were stationed here. It is inscribed with the words <i>In God is my Hope</i>. Local taxes were collected on good leaveing or entering the bargate, and the gate was used as a courtroom until the 1930s. The Bargate was also used as a venue for important civic functions.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/01.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.9029807778", "lon":"-1.40445491667"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":2, 
+			"title":"Arundel Tower.", 
+			"content":"The Town Walls were built after the town was attacked by the French in 1338, surrounding the town and overlooking the sea. Arundel tower, at this section of the wall, is named either after Sir John Arundel, a Knight and Keeper of Southampton, or the supposedly magical horse of Sir Bevois, one of the city founders. <img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/02.jpg'/>", 
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.9029617222", "lon":"-1.40504394444"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":3, 
+			"title":"Catchcold Tower", 
+			"content":"Catchcold tower was the last tower to be added to the medieval walls and built purposefully for ordanance in the early 15th century. It is also the last point of use for defensive purposes hosting an anti-aircraft gun during the 2nd world war. The tower was also known as Pleasent Seat for its panoramic views and the adjacent forty steps or albion stairs lead to the western esplanade.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/03.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.9027671667", "lon":"-1.40476402778"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":4, 
+			"title":"Southampton Castle", 
+			"content":"Southampton Castle was built after the Norman Conquest in 1066, and later demolished in 1805. It had its own quay, guarded by the castle water gate, the castle also had expansive garderobes - a factor in its common use as a banquet hall. Here we find the castles vault, which was used to keep valuables such as wine from Bordeaux.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/04.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.90182875", "lon":"-1.407444"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":5, 
+			"title":"Simnel Street and Biddle Gate", 
+			"content":"Simnel street was the site of a set of baths where, encouraged but medical thinking of the time, many would come for salt water baths to cure ailments. It is also a site that inspired poets and artists with its panormaic views.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/05.jpg'/>", 
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.90032575", "lon":"-1.40662205556"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":6, 
+			"title":"The Arcades.", 
+			"content":"When the walls were built after the french raid of 1338 merchants who prospered in this area were forced to block up the entrances to their warehouses along the quayside. This built the defensive aracdes shown here.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/06.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.9001045", "lon":"-1.40736497222"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":7, 
+			"title":"Westgate.", 
+			"content":"This important gate led directly to the west quay and was used by Henry V as he marched to agincourt and the pilgrim fathers as they embarked on the mayflower. Nearby a cellar also holds the grave of the famous mechanical engineer Walter Taylor, an important pioneer in the machine tool industry.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/07.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.8960418611", "lon":"-1.40570102778"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":8, 
+			"title":"The Wool House", 
+			"content":"The Wool trade was the basis of Southamptons prosperity in the middle ages and this house was built to store the product before export to Genoa and Venice.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/08.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.8975868056", "lon":"-1.40654002778"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":9, 
+			"title":"Watergate", 
+			"content":"The Watergate offered entrance into the wider city from the Town Quay, where Itallian ships would unload wines, dried fruits, silks, and spices for trade.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/09.jpg'/>", 
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.8968048056", "lon":"-1.404531"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":10, 
+			"title":"God's House Tower", 
+			"content":"This tower, named after a nearby hospital, was built to protect the sluice gate entrance into the city. It also served as the towns armoury and housed the towns gunner. Later in 1780s the tower was repurposed and the towns prison.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/10.jpg'/>", 
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.8963241389", "lon":"-1.40293705556"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":11, 
+			"title":"Friary Reredorter", 
+			"content":"The reredorter was built just before 1373 to provide facilities for the nearby friars and strengthen the defenses of the walls. Access from the dorter, or dormitory, was provide by an elevated walkway accross the adjacent road.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/11.jpg'/>",
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.897139", "lon":"-1.402546"},
+					"radius":0.005
+				}
+			]
+		},
+		{
+			"id":12, 
+			"title":"York Gate", 
+			"content":"In 1202 the walls were completed and the town 'closed'. The north wall was the first to be built in this case and the York Gate later provided entry through it in 1769. The gate was named after the Duke of York who visited the town at the time.<img style='opacity: 0.6;filter: alpha(opacity=60);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;' src='https://dl.dropboxusercontent.com/u/18894420/wallimgs/12.jpg'/>", 
+			"nextchapteruri":"wall0_1",
+			"locations":
+			[
+				{
+					"type":"point",
+					"location":{"lat":"50.90266915844934", "lon":"-1.402893215417862"},
+					"radius":0.005
+				}
+			]
+		}
+	]
+}

@@ -92,17 +92,13 @@ public class StoryEngine {
 			//String chapterText = this.getURL(chapterURI+"?lat="+latitude+"&long="+longitude);
 			String chapterText = this.getURL(BASE+"chapter/"+chapterURI+"?lat="+latitude+"&long="+longitude);
 			
-			//Debug from RAWs
-			/*switch(chapterid){
-				case 1: chapterText = JSONLoader.loadFileContents(R.raw.recoil_1); break;
-				case 2: chapterText = JSONLoader.loadFileContents(R.raw.recoil_2); break;
-				case 3: chapterText = JSONLoader.loadFileContents(R.raw.recoil_3); break;
-				case 4: chapterText = JSONLoader.loadFileContents(R.raw.recoil_4); break;
-			}*/
-			if(chapterURI.equals("1")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_1);}
-			else if(chapterURI.equals("2")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_2);}
-			else if(chapterURI.equals("3")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_3);}
-			else if(chapterURI.equals("4")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_4);}			
+			//Debug using RAWs
+			if(chapterURI.equals("recoil_1")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_1);}
+			else if(chapterURI.equals("recoil_2")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_2);}
+			else if(chapterURI.equals("recoil_3")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_3);}
+			else if(chapterURI.equals("recoil_4")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_4);}
+			else if(chapterURI.equals("wall0_1")){chapterText = JSONLoader.loadFileContents(R.raw.wall0_1);}
+			
 			
 			
 			chapterText=chapterText.replace("\n", "");
@@ -342,6 +338,30 @@ public class StoryEngine {
 		return locs;
 	}
 	
+	public SphericalPolygon loadPointLocation(JSONObject locJSON, double r) throws JSONException{
+		Point point = new Point(Double.parseDouble(locJSON.getString("lat")), Double.parseDouble(locJSON
+				.getString("lon")));
+		
+		double R = 6371; // earth radius in km
+		double radius = r; // normal 0.005 km
+		double x1 = point.lon - Math.toDegrees(radius/R/Math.cos(Math.toRadians(point.lat)));
+		double x2 = point.lon + Math.toDegrees(radius/R/Math.cos(Math.toRadians(point.lat)));
+		double y1 = point.lat + Math.toDegrees(radius/R);
+		double y2 = point.lat - Math.toDegrees(radius/R);
+		
+		Point[] points = new Point[]{
+				new Point(y1, x1),
+				new Point(y2, x1),
+				new Point(y2, x2),
+				new Point(y1, x2)};
+		SphericalPolygon centreBox = new SphericalPolygon(points);
+		
+		return centreBox;
+		
+	}
+	
+	/**/
+	
 	public void loadLocations(Page page, JSONObject pageJSON) throws JSONException, UnsupportedEncodingException{
 		// Build locations
 		
@@ -379,7 +399,7 @@ public class StoryEngine {
 					page.addLocation(loadPolygonLocation(locationJSON.getJSONArray("location")));
 				}
 				else if(type.equals("point")){
-					//TODO: Make a circle from a point and radius
+					page.addLocation(loadPointLocation(locationJSON.getJSONObject("location"), locationJSON.getDouble("radius")));
 				}
 				else if(type.equals("query")){
 					for(SphericalPolygon loc:loadQueryLocation(locationJSON.getString("location"))){
