@@ -48,7 +48,7 @@ public class StoryEngine {
 
 	private static final String TAG = "StoryController";
 	
-	private static final String BASE = "http://www.yarnspinner.ecs.soton.ac.uk/data/";
+	private static final String BASE = "http://www.yarnspinner.ecs.soton.ac.uk/export/";
 	
 	private static final String LOC_BASE = "http://tools.southampton.ac.uk/places/";
 	
@@ -59,8 +59,8 @@ public class StoryEngine {
 				
 		ArrayList<Story> stories = new ArrayList<Story>();
 		try {
-			//String storyText = this.getURL(BASE +"yarns");
-			String storyText = JSONLoader.loadFileContents(R.raw.stories);//Test from raw
+			String storyText = this.getURL(BASE +"stories");
+			//storyText = JSONLoader.loadFileContents(R.raw.stories);//Test from raw
 						
 			Log.i("GeoYarn: ", "StoryList: "+storyText);
 			
@@ -70,7 +70,7 @@ public class StoryEngine {
 				JSONObject storyJSON = storiesJSON.getJSONObject(i);
 				Story story = new Story();
 				story.setTitle(storyJSON.getString("title"));
-				story.setId(storyJSON.getInt("id"));
+				//story.setId(storyJSON.getInt("id"));
 				story.setURI(storyJSON.getString("uri"));
 				story.setStartChapter(storyJSON.getString("startchapteruri"));
 				stories.add(story);
@@ -90,14 +90,15 @@ public class StoryEngine {
 		try {
 			//String chapterText = this.getURL(BASE+"chapter/"+chapterid+"?lat="+latitude+"&long="+longitude);
 			//String chapterText = this.getURL(chapterURI+"?lat="+latitude+"&long="+longitude);
-			String chapterText = this.getURL(BASE+"chapter/"+chapterURI+"?lat="+latitude+"&long="+longitude);
+			//String chapterText = this.getURL(BASE+"chapter/"+chapterURI+"?lat="+latitude+"&long="+longitude);
+			String chapterText = this.getURL(chapterURI+"?lat="+latitude+"&long="+longitude);
 			
 			//Debug using RAWs
-			if(chapterURI.equals("recoil_1")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_1);}
+			/*if(chapterURI.equals("recoil_1")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_1);}
 			else if(chapterURI.equals("recoil_2")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_2);}
 			else if(chapterURI.equals("recoil_3")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_3);}
 			else if(chapterURI.equals("recoil_4")){chapterText = JSONLoader.loadFileContents(R.raw.recoil_4);}
-			else if(chapterURI.equals("wall0_1")){chapterText = JSONLoader.loadFileContents(R.raw.wall0_1);}
+			else if(chapterURI.equals("wall0_1")){chapterText = JSONLoader.loadFileContents(R.raw.wall0_1);}*/
 			
 			
 			
@@ -108,7 +109,7 @@ public class StoryEngine {
 			Log.i("GeoYarn: ", "ChapText "+chapterURI+" "+chapterText);
 						
 			JSONObject chapterJSON = new JSONObject(chapterText);
-			chapter.setId(chapterJSON.getInt("id"));
+			//chapter.setId(chapterJSON.getInt("id"));
 			chapter.setURI(chapterJSON.getString("uri"));
 			
 			// Build pages
